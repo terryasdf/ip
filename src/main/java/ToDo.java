@@ -1,13 +1,13 @@
-public class Task {
+public class ToDo {
     private String description;
     private boolean isDone;
 
-    public Task() {
+    public ToDo() {
         description = "";
         isDone = false;
     }
 
-    public Task(String description) {
+    public ToDo(String description) {
         this.description = description;
         this.isDone = false;
     }

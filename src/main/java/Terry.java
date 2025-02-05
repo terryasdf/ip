@@ -9,7 +9,7 @@ public class Terry {
     public static final String UNMARK_TASK_MSG = "Task marked as not done.";
 
     private final static int MAX_TASKS = 100;
-    private final static Task[] tasks = new Task[MAX_TASKS];
+    private final static ToDo[] todos = new ToDo[MAX_TASKS];
     private static int taskCount = 0;
 
 
@@ -27,7 +27,7 @@ public class Terry {
 
     private static String getFormattedTaskInfo(int id) {
         if (id < 0 || id >= taskCount) return "";
-        return "[" + (tasks[id].isDone() ? 'X' : ' ') + "] " + tasks[id].getDescription();
+        return "[" + (todos[id].isDone() ? 'X' : ' ') + "] " + todos[id].getDescription();
     }
 
     private static void printTasks() {
@@ -39,20 +39,20 @@ public class Terry {
     private static void addTask(String description) {
         if (taskCount == MAX_TASKS) return;
 
-        tasks[taskCount++] = new Task(description);
+        todos[taskCount++] = new ToDo(description);
         System.out.println("added: " + description);
     }
 
     private static void markTask(int id) {
         if (id < 0 || id >= taskCount) return;
-        tasks[id].setDone(true);
+        todos[id].setDone(true);
         System.out.println(MARK_TASK_MSG);
         System.out.println("\t" + getFormattedTaskInfo(id));
     }
 
     private static void unmarkTask(int id) {
         if (id < 0 || id >= taskCount) return;
-        tasks[id].setDone(false);
+        todos[id].setDone(false);
         System.out.println(UNMARK_TASK_MSG);
         System.out.println("\t" + getFormattedTaskInfo(id));
     }
