@@ -10,7 +10,17 @@ public class TerryService {
 
     public static Msg getFormattedToDoInfoList() {
         String[] infoList = TerryController.getFormattedToDoInfoList();
-        return new Msg(ReturnStatus.SUCCESS, String.join("\n", infoList));
+
+        if (infoList.length == 0) {
+            return new Msg(ReturnStatus.SUCCESS, MsgString.LIST_TODO_NONE_MSG.toString());
+        }
+
+        StringBuilder ret = new StringBuilder();
+        int cnt = 0;
+        for (String info : infoList) {
+            ret.append(++cnt).append('.').append(info).append('\n');
+        }
+        return new Msg(ReturnStatus.SUCCESS, MsgString.LIST_TODO_MSG + "\n" + ret.toString());
     }
 
     public static Msg addToDo(ToDo todo) {
