@@ -35,7 +35,7 @@ public class Event extends ToDo {
     public static Event parse(CmdOptArg[] optArgList) {
         checkArgCount(optArgList, 3);
 
-        String description = "A task";
+        String description = null;
         String startTime = null;
         String endTime = null;
         for (CmdOptArg optArg : optArgList) {
@@ -48,7 +48,9 @@ public class Event extends ToDo {
             }
         }
 
-        if (startTime == null) {
+        if (description == null) {
+            throw new IllegalArgumentException("No description provided.");
+        } if (startTime == null) {
             throw new IllegalArgumentException("No start time provided.");
         } if (endTime == null) {
             throw new IllegalArgumentException("No end time provided.");

@@ -23,8 +23,10 @@ public class CmdParser {
                 arg.append(cmdArgs[i]).append(" ");
                 continue;
             }
-            newOptArg.setArg(arg.toString().strip());
-            cmd.addOptArg(newOptArg);
+            if (i > 1) {
+                newOptArg.setArg(arg.toString().strip());
+                cmd.addOptArg(newOptArg);
+            }
             newOptArg = new CmdOptArg(cmdArgs[i].substring(1));
             arg = new StringBuilder();
         }

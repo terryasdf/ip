@@ -37,6 +37,10 @@ public class ToDo {
 
     public static ToDo parse(CmdOptArg[] optArgList) {
         checkArgCount(optArgList, 1);
-        return new ToDo(optArgList[0].getArg());
+        String description = optArgList[0].getArg();
+        if (description.isEmpty()) {
+            throw new IllegalArgumentException("No description provided.");
+        }
+        return new ToDo(description);
     }
 }

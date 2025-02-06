@@ -23,7 +23,7 @@ public class Deadline extends ToDo {
 
     public static Deadline parse(CmdOptArg[] optArgList) {
         checkArgCount(optArgList, 2);
-        String description = "A task";
+        String description = null;
         String ddlTime = null;
 
         for (CmdOptArg optArg : optArgList) {
@@ -34,7 +34,9 @@ public class Deadline extends ToDo {
             }
         }
 
-        if (ddlTime == null) {
+        if (description == null) {
+            throw new IllegalArgumentException("No description provided.");
+        } if (ddlTime == null) {
             throw new IllegalArgumentException("No deadline provided.");
         }
         return new Deadline(description, ddlTime);
