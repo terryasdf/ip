@@ -1,10 +1,11 @@
 public class ToDo {
-    private String description;
-    private boolean isDone;
+    protected String description;
+    protected boolean isDone;
 
-    public ToDo() {
-        description = "";
-        isDone = false;
+    protected static void checkArgCount(CmdOptArg[] optArgList, int leastCount) {
+        if (optArgList.length < leastCount) {
+            throw new IllegalArgumentException("Argument not matching");
+        }
     }
 
     public ToDo(String description) {
@@ -26,5 +27,16 @@ public class ToDo {
 
     public void setDone(boolean done) {
         isDone = done;
+    }
+
+    @Override
+    public String toString() {
+        String doneStatus = "[T][" + (isDone ? 'X' : ' ') + "] ";
+        return doneStatus + " " + description;
+    }
+
+    public static ToDo parse(CmdOptArg[] optArgList) {
+        checkArgCount(optArgList, 1);
+        return new ToDo(optArgList[0].getArg());
     }
 }

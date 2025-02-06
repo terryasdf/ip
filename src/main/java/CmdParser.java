@@ -15,7 +15,7 @@ public class CmdParser {
 
         if (cmd.getKeyword() == CmdKeyword.CMD_NONE) return cmd;
 
-        CmdOptArg newOptArg = null;
+        CmdOptArg newOptArg = new CmdOptArg();
         StringBuilder arg = new StringBuilder();
         int numWords = cmdArgs.length;
         for (int i = 1; i < numWords; ++i) {
@@ -23,20 +23,12 @@ public class CmdParser {
                 arg.append(cmdArgs[i]).append(" ");
                 continue;
             }
-            if (newOptArg == null) {
-                newOptArg = new CmdOptArg(cmdArgs[i]);
-                arg = new StringBuilder();
-                continue;
-            }
             newOptArg.setArg(arg.toString().strip());
             cmd.addOptArg(newOptArg);
-            newOptArg = new CmdOptArg(cmdArgs[i]);
+            newOptArg = new CmdOptArg(cmdArgs[i].substring(1));
             arg = new StringBuilder();
         }
 
-        if (isOpt(cmdArgs[numWords-1])) return cmd;
-
-        if (newOptArg == null) newOptArg = new CmdOptArg("");
         newOptArg.setArg(arg.toString().strip());
         cmd.addOptArg(newOptArg);
         return cmd;

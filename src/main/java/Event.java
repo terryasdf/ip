@@ -23,4 +23,36 @@ public class Event extends ToDo {
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
+
+    @Override
+    public String toString() {
+        String doneStatus = "[E][" + (isDone ? 'X' : ' ') + "] ";
+        String from = " <from: " + startTime + ">";
+        String to = " <to: " + endTime + ">";
+        return doneStatus + " " + description + from + to;
+    }
+
+    public static Event parse(CmdOptArg[] optArgList) {
+        checkArgCount(optArgList, 3);
+
+        String description = "A task";
+        String startTime = null;
+        String endTime = null;
+        for (CmdOptArg optArg : optArgList) {
+            if (optArg.isOpt("")) {
+                description = optArg.getArg();
+            } else if (optArg.isOpt("from")) {
+                startTime = optArg.getArg();
+            } else if (optArg.isOpt("to")) {
+                endTime = optArg.getArg();
+            }
+        }
+
+        if (startTime == null) {
+            throw new IllegalArgumentException("No start time provided.");
+        } if (endTime == null) {
+            throw new IllegalArgumentException("No end time provided.");
+        }
+        return new Event(description, startTime, endTime);
+    }
 }

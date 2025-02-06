@@ -13,11 +13,11 @@ public class TerryService {
         return new Msg(ReturnStatus.SUCCESS, String.join("\n", infoList));
     }
 
-    public static Msg addToDo(String description) {
-        boolean status = TerryController.addToDo(description);
+    public static Msg addToDo(ToDo todo) {
+        boolean status = TerryController.addToDo(todo);
         String info = status ?
                 generateInfo(MsgString.CMD_FAILED_MSG, "add: [PLACEHOLDER]Some error") :
-                generateInfo(MsgString.ADD_TODO_MSG, description);
+                generateInfo(MsgString.ADD_TODO_MSG, todo.toString());
         ReturnStatus returnStatus = status ? ReturnStatus.FAILED : ReturnStatus.SUCCESS;
         return new Msg(returnStatus, info);
     }

@@ -27,4 +27,12 @@ public class CmdOptArg {
     public void setArg(String arg) {
         this.arg = arg;
     }
+
+    public boolean isOpt(String opt) {
+        return this.opt.equals(opt) || opt.startsWith(this.opt);
+    }
+
+    public int parseInt() {
+        return Integer.parseInt(arg);
+    }
 }

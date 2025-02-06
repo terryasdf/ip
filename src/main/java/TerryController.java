@@ -7,28 +7,20 @@ public class TerryController {
 
     public static String getFormattedToDoInfo(int id) {
         if (id < 0 || id >= size) return "Invalid task id";
-        String doneStatus = "[" + (todoList[id].isDone() ? 'X' : ' ') + "] ";
-        return doneStatus + todoList[id].getDescription();
+        return todoList[id].toString();
     }
 
     public static String[] getFormattedToDoInfoList() {
         String[] ret = new String[size];
         for (int i = 0; i < size; ++i) {
-            ret[i] = getFormattedToDoInfo(i);
+            ret[i] = todoList[i].toString();
         }
         return ret;
     }
 
-
     public static boolean addToDo(ToDo todo) {
         if (size == MAX_SIZE) return true;
         todoList[size++] = todo;
-        return false;
-    }
-
-    public static boolean addToDo(String description) {
-        if (size == MAX_SIZE) return true;
-        todoList[size++] = new ToDo(description);
         return false;
     }
 
