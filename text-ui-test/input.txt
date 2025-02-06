@@ -1,0 +1,16 @@
+todo a
+todo
+asdf
+list
+ddl bb -by 10
+ddl ccc /b 11
+mark 2
+event dddd -t 20 -f 10
+event fdas -t 10
+event -from -t
+unmark 4
+mark 7
+list
+unmark 2
+list
+bye
