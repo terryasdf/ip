@@ -1,3 +1,5 @@
+package terry.cmd;
+
 import java.util.ArrayList;
 
 public class Cmd {

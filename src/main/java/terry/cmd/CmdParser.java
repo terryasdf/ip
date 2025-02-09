@@ -1,3 +1,5 @@
+package terry.cmd;
+
 public class CmdParser {
     static public Cmd parseCmdInput(String cmdInput) {
         String[] cmdArgs = cmdInput.split(" ");

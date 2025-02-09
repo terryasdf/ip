@@ -1,4 +1,8 @@
-public class TerryController {
+package terry.framework;
+
+import terry.entity.ToDo;
+
+public class Controller {
     private static final int MAX_SIZE = 100;
     private static int size = 0;
     private static final ToDo[] todoList = new ToDo[MAX_SIZE];

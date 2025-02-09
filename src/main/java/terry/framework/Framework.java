@@ -1,6 +1,18 @@
+package terry.framework;
+
+import terry.cmd.Cmd;
+import terry.cmd.CmdKeyword;
+import terry.cmd.CmdOptArg;
+import terry.cmd.CmdParser;
+import terry.entity.Deadline;
+import terry.entity.Event;
+import terry.entity.ToDo;
+import terry.msg.Msg;
+import terry.msg.MsgHandler;
+import terry.msg.ReturnStatus;
 import java.util.Scanner;
 
-public class TerryFramework {
+public class Framework {
     private static boolean parseAndExecuteCmd(String cmdInput) {
         Cmd cmd = CmdParser.parseCmdInput(cmdInput);
         CmdKeyword keyword = cmd.getKeyword();
@@ -11,27 +23,27 @@ public class TerryFramework {
             MsgHandler.printExitMsg();
             return false;
         case CMD_LIST:
-            MsgHandler.printMsgGeneric(TerryService.getFormattedToDoInfoList());
+            MsgHandler.printMsgGeneric(Service.getFormattedToDoInfoList());
             break;
         case CMD_MARK:
             assert optArgList.length > 0;
-            MsgHandler.printMsgGeneric(TerryService.markToDo(optArgList[0].parseInt() - 1));
+            MsgHandler.printMsgGeneric(Service.markToDo(optArgList[0].parseInt() - 1));
             break;
         case CMD_UNMARK:
             assert optArgList.length > 0;
-            MsgHandler.printMsgGeneric(TerryService.unmarkToDo(optArgList[0].parseInt() - 1));
+            MsgHandler.printMsgGeneric(Service.unmarkToDo(optArgList[0].parseInt() - 1));
             break;
         case CMD_DDL:
             Deadline ddl = Deadline.parse(optArgList);
-            MsgHandler.printMsgGeneric(TerryService.addToDo(ddl));
+            MsgHandler.printMsgGeneric(Service.addToDo(ddl));
             break;
         case CMD_EVENT:
             Event event = Event.parse(optArgList);
-            MsgHandler.printMsgGeneric(TerryService.addToDo(event));
+            MsgHandler.printMsgGeneric(Service.addToDo(event));
             break;
         case CMD_TODO:
             ToDo todo = ToDo.parse(optArgList);
-            MsgHandler.printMsgGeneric(TerryService.addToDo(todo));
+            MsgHandler.printMsgGeneric(Service.addToDo(todo));
             break;
         default:
             throw new RuntimeException("Unknown command");

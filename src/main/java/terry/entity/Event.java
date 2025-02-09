@@ -1,3 +1,7 @@
+package terry.entity;
+
+import terry.cmd.CmdOptArg;
+
 public class Event extends ToDo {
     private String startTime;
     private String endTime;

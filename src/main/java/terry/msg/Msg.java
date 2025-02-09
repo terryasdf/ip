@@ -1,3 +1,5 @@
+package terry.msg;
+
 public class Msg {
     private final ReturnStatus status;
     private final String info;

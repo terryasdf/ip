@@ -1,3 +1,5 @@
+package terry.msg;
+
 public class MsgHandler {
     public static void printGreetingMsg() {
         System.out.println(MsgString.SPLIT_LINE);

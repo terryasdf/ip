@@ -1,3 +1,5 @@
+package terry.cmd;
+
 public enum CmdKeyword {
     CMD_TODO, CMD_DDL, CMD_EVENT, CMD_LIST, CMD_EXIT, CMD_MARK, CMD_UNMARK, CMD_NONE;
 

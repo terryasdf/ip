@@ -1,4 +1,12 @@
-public class TerryService {
+package terry.framework;
+
+import terry.cmd.CmdKeyword;
+import terry.entity.ToDo;
+import terry.msg.Msg;
+import terry.msg.MsgString;
+import terry.msg.ReturnStatus;
+
+public class Service {
     private static String generateErrorInfo(CmdKeyword keyword, String errorInfo) {
         return keyword + ": " + errorInfo;
     }
@@ -9,7 +17,7 @@ public class TerryService {
 
 
     public static Msg getFormattedToDoInfoList() {
-        String[] infoList = TerryController.getFormattedToDoInfoList();
+        String[] infoList = Controller.getFormattedToDoInfoList();
 
         if (infoList.length == 0) {
             return new Msg(ReturnStatus.SUCCESS, MsgString.LIST_TODO_NONE_MSG.toString());
@@ -24,7 +32,7 @@ public class TerryService {
     }
 
     public static Msg addToDo(ToDo todo) {
-        boolean status = TerryController.addToDo(todo);
+        boolean status = Controller.addToDo(todo);
         String info = status ?
                 generateInfo(MsgString.CMD_FAILED_MSG, "add: [PLACEHOLDER]Some error") :
                 generateInfo(MsgString.ADD_TODO_MSG, todo.toString());
@@ -33,22 +41,22 @@ public class TerryService {
     }
 
     public static Msg markToDo(int id) {
-        boolean status = TerryController.markToDo(id);
+        boolean status = Controller.markToDo(id);
         if (status) {
             String errorInfo = generateErrorInfo(CmdKeyword.CMD_MARK, "[PLACEHOLDER]some error");
             return new Msg(ReturnStatus.FAILED, generateInfo(MsgString.CMD_FAILED_MSG, errorInfo));
         }
-        String info = generateInfo(MsgString.MARK_TODO_MSG, TerryController.getFormattedToDoInfo(id));
+        String info = generateInfo(MsgString.MARK_TODO_MSG, Controller.getFormattedToDoInfo(id));
         return new Msg(ReturnStatus.SUCCESS, info);
     }
 
     public static Msg unmarkToDo(int id) {
-        boolean status = TerryController.unmarkToDo(id);
+        boolean status = Controller.unmarkToDo(id);
         if (status) {
             String errorInfo = generateErrorInfo(CmdKeyword.CMD_UNMARK, "[PLACEHOLDER]some error");
             return new Msg(ReturnStatus.FAILED, generateInfo(MsgString.CMD_FAILED_MSG, errorInfo));
         }
-        String info = generateInfo(MsgString.UNMARK_TODO_MSG, TerryController.getFormattedToDoInfo(id));
+        String info = generateInfo(MsgString.UNMARK_TODO_MSG, Controller.getFormattedToDoInfo(id));
         return new Msg(ReturnStatus.SUCCESS, info);
     }
 }

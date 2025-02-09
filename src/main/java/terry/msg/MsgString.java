@@ -1,3 +1,5 @@
+package terry.msg;
+
 public enum MsgString {
     SPLIT_LINE, GREETING_MSG, EXIT_MSG, ADD_TODO_MSG,
     LIST_TODO_MSG, LIST_TODO_NONE_MSG, MARK_TODO_MSG,

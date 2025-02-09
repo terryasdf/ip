@@ -1,3 +1,7 @@
+package terry.entity;
+
+import terry.cmd.CmdOptArg;
+
 public class ToDo {
     protected String description;
     protected boolean isDone;

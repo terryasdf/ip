@@ -1,3 +1,7 @@
+package terry.entity;
+
+import terry.cmd.CmdOptArg;
+
 public class Deadline extends ToDo {
     private String ddlTime;
 

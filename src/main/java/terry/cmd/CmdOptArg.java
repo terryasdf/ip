@@ -1,3 +1,5 @@
+package terry.cmd;
+
 public class CmdOptArg {
     private String opt;
     private String arg;
