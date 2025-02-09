@@ -23,27 +23,27 @@ public class Framework {
             MsgHandler.printExitMsg();
             return false;
         case CMD_LIST:
-            MsgHandler.printMsgGeneric(Service.getFormattedToDoInfoList());
+            MsgHandler.printMsgGeneric(Controller.getFormattedToDoInfoList());
             break;
         case CMD_MARK:
             assert optArgList.length > 0;
-            MsgHandler.printMsgGeneric(Service.markToDo(optArgList[0].parseInt() - 1));
+            MsgHandler.printMsgGeneric(Controller.markToDo(optArgList[0].parseInt() - 1));
             break;
         case CMD_UNMARK:
             assert optArgList.length > 0;
-            MsgHandler.printMsgGeneric(Service.unmarkToDo(optArgList[0].parseInt() - 1));
+            MsgHandler.printMsgGeneric(Controller.unmarkToDo(optArgList[0].parseInt() - 1));
             break;
         case CMD_DDL:
             Deadline ddl = Deadline.parse(optArgList);
-            MsgHandler.printMsgGeneric(Service.addToDo(ddl));
+            MsgHandler.printMsgGeneric(Controller.addToDo(ddl));
             break;
         case CMD_EVENT:
             Event event = Event.parse(optArgList);
-            MsgHandler.printMsgGeneric(Service.addToDo(event));
+            MsgHandler.printMsgGeneric(Controller.addToDo(event));
             break;
         case CMD_TODO:
             ToDo todo = ToDo.parse(optArgList);
-            MsgHandler.printMsgGeneric(Service.addToDo(todo));
+            MsgHandler.printMsgGeneric(Controller.addToDo(todo));
             break;
         default:
             throw new RuntimeException("Unknown command");
