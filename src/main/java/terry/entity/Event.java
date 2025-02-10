@@ -2,6 +2,9 @@ package terry.entity;
 
 import terry.cmd.CmdOptArg;
 
+/**
+ * Stores {@link ToDo} with a start time and an end time.
+ */
 public class Event extends ToDo {
     private String startTime;
     private String endTime;
@@ -36,6 +39,13 @@ public class Event extends ToDo {
         return doneStatus + " " + description + from + to;
     }
 
+    /**
+     * Parses a given list of {@link CmdOptArg} and returns a {@link ToDo} if possible.
+     * <ul>Required options:
+     *  <li>"": description</li>
+     *  <li>"from": start time</li>
+     *  <li>"to": end time</li>
+     */
     public static Event parse(CmdOptArg[] optArgList) {
         checkArgCount(optArgList, 3);
 

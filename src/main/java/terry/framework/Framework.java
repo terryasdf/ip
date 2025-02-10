@@ -12,7 +12,16 @@ import terry.msg.MsgHandler;
 import terry.msg.ReturnStatus;
 import java.util.Scanner;
 
+/**
+ * The main Terry Chatbot CLI.
+ * <p>Calls {@link Controller} methods for data access and show {@link Msg} via {@link MsgHandler}.
+ */
+
 public class Framework {
+
+    /**
+     * Process and execute a {@link String} command.
+     */
     private static boolean parseAndExecuteCmd(String cmdInput) {
         Cmd cmd = CmdParser.parseCmdInput(cmdInput);
         CmdKeyword keyword = cmd.getKeyword();
@@ -52,6 +61,9 @@ public class Framework {
         return true;
     }
 
+    /**
+     * Starts the Terry Chatbot.
+     */
     public static void runCLI() {
         MsgHandler.printGreetingMsg();
         Scanner in = new Scanner(System.in);

@@ -2,6 +2,10 @@ package terry.framework;
 
 import terry.entity.ToDo;
 
+/**
+ * Has direct CRUD access to the todo list.
+ */
+
 public class Service {
     private static final int MAX_SIZE = 100;
     private static int size = 0;

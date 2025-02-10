@@ -2,6 +2,9 @@ package terry.entity;
 
 import terry.cmd.CmdOptArg;
 
+/**
+ * Stores todos.
+ */
 public class ToDo {
     protected String description;
     protected boolean isDone;
@@ -39,6 +42,11 @@ public class ToDo {
         return doneStatus + " " + description;
     }
 
+    /**
+     * Parses a given list of {@link CmdOptArg} and returns a {@link ToDo} if possible.
+     * <ul>Required options:
+     *  <li>"": description</li>
+     */
     public static ToDo parse(CmdOptArg[] optArgList) {
         checkArgCount(optArgList, 1);
         String description = optArgList[0].getArg();

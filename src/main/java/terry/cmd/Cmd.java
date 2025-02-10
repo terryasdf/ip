@@ -2,10 +2,16 @@ package terry.cmd;
 
 import java.util.ArrayList;
 
+/**
+ * Parses command lines. Contains a {@link CmdKeyword} and a list of {@link CmdOptArg}.
+ */
 public class Cmd {
     private CmdKeyword keyword;
     private final ArrayList<CmdOptArg> optArgList;
 
+    /**
+     * Constructs a {@code Cmd} with an empty {@code optArgList}.
+     */
     public Cmd(CmdKeyword keyword) {
         this.keyword = keyword;
         this.optArgList = new ArrayList<>();

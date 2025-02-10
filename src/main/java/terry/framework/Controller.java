@@ -6,6 +6,10 @@ import terry.msg.Msg;
 import terry.msg.MsgString;
 import terry.msg.ReturnStatus;
 
+/**
+ * Calls {@link Service} methods and parses the responses into {@link Msg}.
+ */
+
 public class Controller {
     private static String generateErrorInfo(CmdKeyword keyword, String errorInfo) {
         return keyword + ": " + errorInfo;

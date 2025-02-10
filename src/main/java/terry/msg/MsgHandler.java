@@ -1,5 +1,8 @@
 package terry.msg;
 
+/**
+ * Responsible for displaying {@link Msg}.
+ */
 public class MsgHandler {
     public static void printGreetingMsg() {
         System.out.println(MsgString.SPLIT_LINE);
@@ -13,6 +16,9 @@ public class MsgHandler {
         System.out.println(MsgString.SPLIT_LINE);
     }
 
+    /**
+     * Displays {@code info} of a {@link Msg}.
+     */
     public static void printMsgGeneric(Msg msg) {
         System.out.println(MsgString.SPLIT_LINE);
         System.out.println(msg.getInfo());
