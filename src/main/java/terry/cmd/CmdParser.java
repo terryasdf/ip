@@ -1,11 +1,13 @@
 package terry.cmd;
 
+import terry.exception.UnknownCmdKeywordException;
+
 public class CmdParser {
 
     /**
      * Parses the input line into {@link Cmd}.
      */
-    static public Cmd parseCmdInput(String cmdInput) {
+    static public Cmd parseCmdInput(String cmdInput) throws UnknownCmdKeywordException {
         String[] cmdArgs = cmdInput.split(" ");
         Cmd cmd = new Cmd(CmdKeyword.CMD_NONE);
 
@@ -21,7 +23,9 @@ public class CmdParser {
         }
 
         // Not a legit keyword
-        if (cmd.getKeyword() == CmdKeyword.CMD_NONE) return cmd;
+        if (cmd.getKeyword() == CmdKeyword.CMD_NONE) {
+            throw new UnknownCmdKeywordException(keywordString);
+        }
 
         CmdOptArg newOptArg = new CmdOptArg();
         StringBuilder arg = new StringBuilder();

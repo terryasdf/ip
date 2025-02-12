@@ -7,6 +7,8 @@ import terry.cmd.CmdParser;
 import terry.entity.Deadline;
 import terry.entity.Event;
 import terry.entity.ToDo;
+import terry.exception.ExceptionHandler;
+import terry.exception.UnknownCmdKeywordException;
 import terry.msg.Msg;
 import terry.msg.MsgHandler;
 import terry.msg.ReturnStatus;
@@ -22,7 +24,7 @@ public class Framework {
     /**
      * Process and execute a {@link String} command.
      */
-    private static boolean parseAndExecuteCmd(String cmdInput) {
+    private static boolean parseAndExecuteCmd(String cmdInput) throws UnknownCmdKeywordException {
         Cmd cmd = CmdParser.parseCmdInput(cmdInput);
         CmdKeyword keyword = cmd.getKeyword();
         CmdOptArg[] optArgList = cmd.getOptArgList().toArray(CmdOptArg[]::new);
@@ -54,8 +56,6 @@ public class Framework {
             ToDo todo = ToDo.parse(optArgList);
             MsgHandler.printMsgGeneric(Controller.addToDo(todo));
             break;
-        default:
-            throw new RuntimeException("Unknown command");
         }
 
         return true;
@@ -79,8 +79,8 @@ public class Framework {
             } catch (NumberFormatException nfe) {
                 Msg msg = new Msg(ReturnStatus.FAILED, "Not a number");
                 MsgHandler.printMsgGeneric(msg);
-            } catch (RuntimeException e) {
-                Msg msg = new Msg(ReturnStatus.FAILED, e.getMessage());
+            } catch (UnknownCmdKeywordException e) {
+                Msg msg = ExceptionHandler.handleUnknownCmdKeywordException(e);
                 MsgHandler.printMsgGeneric(msg);
             }
         }
