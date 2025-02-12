@@ -1,6 +1,9 @@
 package terry.entity;
 
 import terry.cmd.CmdOptArg;
+import terry.exception.MissingOptArgException;
+
+import java.util.List;
 
 /**
  * Stores todos.
@@ -9,9 +12,9 @@ public class ToDo {
     protected String description;
     protected boolean isDone;
 
-    protected static void checkArgCount(CmdOptArg[] optArgList, int leastCount) {
-        if (optArgList.length < leastCount) {
-            throw new IllegalArgumentException("Argument not matching");
+    protected static void checkArgCount(List<CmdOptArg> optArgList, int leastCount) throws MissingOptArgException {
+        if (optArgList.size() < leastCount) {
+            throw new MissingOptArgException(optArgList);
         }
     }
 
@@ -43,15 +46,15 @@ public class ToDo {
     }
 
     /**
-     * Parses a given list of {@link CmdOptArg} and returns a {@link ToDo} if possible.
+     * Parses a given {@link List} of {@link CmdOptArg} and returns a {@link ToDo} if possible.
      * <ul>Required options:
      *  <li>"": description</li>
      */
-    public static ToDo parse(CmdOptArg[] optArgList) {
+    public static ToDo parse(List<CmdOptArg> optArgList) throws MissingOptArgException {
         checkArgCount(optArgList, 1);
-        String description = optArgList[0].getArg();
+        String description = optArgList.iterator().next().getArg();
         if (description.isEmpty()) {
-            throw new IllegalArgumentException("No description provided.");
+            throw new MissingOptArgException(optArgList);
         }
         return new ToDo(description);
     }

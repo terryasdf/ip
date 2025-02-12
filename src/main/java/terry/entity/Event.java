@@ -1,6 +1,9 @@
 package terry.entity;
 
 import terry.cmd.CmdOptArg;
+import terry.exception.MissingOptArgException;
+
+import java.util.List;
 
 /**
  * Stores {@link ToDo} with a start time and an end time.
@@ -46,7 +49,7 @@ public class Event extends ToDo {
      *  <li>"from": start time</li>
      *  <li>"to": end time</li>
      */
-    public static Event parse(CmdOptArg[] optArgList) {
+    public static Event parse(List<CmdOptArg> optArgList) throws MissingOptArgException {
         checkArgCount(optArgList, 3);
 
         String description = null;
@@ -63,11 +66,11 @@ public class Event extends ToDo {
         }
 
         if (description == null) {
-            throw new IllegalArgumentException("No description provided.");
+            throw new MissingOptArgException(optArgList);
         } if (startTime == null) {
-            throw new IllegalArgumentException("No start time provided.");
+            throw new MissingOptArgException(optArgList);
         } if (endTime == null) {
-            throw new IllegalArgumentException("No end time provided.");
+            throw new MissingOptArgException(optArgList);
         }
         return new Event(description, startTime, endTime);
     }

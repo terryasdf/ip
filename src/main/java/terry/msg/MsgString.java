@@ -6,7 +6,7 @@ package terry.msg;
 public enum MsgString {
     SPLIT_LINE, GREETING_MSG, EXIT_MSG, ADD_TODO_MSG,
     LIST_TODO_MSG, LIST_TODO_NONE_MSG, MARK_TODO_MSG,
-    UNMARK_TODO_MSG, CMD_FAILED_MSG, NONE;
+    UNMARK_TODO_MSG, NONE;
 
     @Override
     public String toString() {
@@ -18,7 +18,6 @@ public enum MsgString {
             case LIST_TODO_NONE_MSG -> "Oops, I didn't find any todos.";
             case MARK_TODO_MSG -> "Task marked as done. Nice job.";
             case UNMARK_TODO_MSG -> "Task marked as not done.";
-            case CMD_FAILED_MSG -> "No can do :(";
             case NONE -> "";
             case GREETING_MSG -> "Ciallo!\n\n" +
                     "          ..............\n" +

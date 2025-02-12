@@ -1,34 +1,37 @@
 package terry.cmd;
 
+import terry.exception.UnknownCmdKeywordException;
+
 public class CmdParser {
 
     /**
      * Parses the input line into {@link Cmd}.
      */
-    static public Cmd parseCmdInput(String cmdInput) {
+    static public Cmd parseCmdInput(String cmdInput) throws UnknownCmdKeywordException {
         String[] cmdArgs = cmdInput.split(" ");
-        Cmd cmd = new Cmd(CmdKeyword.CMD_NONE);
-
-        // No content
-        if (cmdArgs.length == 0) return cmd;
+        Cmd cmd = null;
 
         String keywordString = cmdArgs[0].toLowerCase();
         for (CmdKeyword i : CmdKeyword.values()) {
             if (keywordString.equals(i.toString())) {
-                cmd.setKeyword(i);
+                cmd = new Cmd(i);
                 break;
             }
         }
 
         // Not a legit keyword
-        if (cmd.getKeyword() == CmdKeyword.CMD_NONE) return cmd;
+        if (cmd == null) {
+            throw new UnknownCmdKeywordException(keywordString);
+        }
+
+        int numWords = cmdArgs.length;
+        if (numWords == 1) return cmd;
 
         CmdOptArg newOptArg = new CmdOptArg();
         StringBuilder arg = new StringBuilder();
-        int numWords = cmdArgs.length;
         for (int i = 1; i < numWords; ++i) {
             if (!isOpt(cmdArgs[i])) {
-                arg.append(cmdArgs[i]).append(" ");
+                arg.append(cmdArgs[i]).append(' ');
                 continue;
             }
             // Contains extra words before a new option
@@ -46,7 +49,7 @@ public class CmdParser {
     }
 
     /**
-     * Checks if a {@code String} is a option expression.
+     * Checks if a {@code String} is an option expression.
      * <p>Returns {@code true} if the string starts with {@code '-'} or {@code '/'}.
      */
     private static boolean isOpt(String s) {

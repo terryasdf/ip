@@ -4,7 +4,7 @@ import terry.entity.ToDo;
 
 /**
  * Has direct CRUD access to the todo list.
- * <p>Returns unprocessed data.
+ * <ul><li>Returns unprocessed data</li>
  */
 
 public class Service {
@@ -27,21 +27,24 @@ public class Service {
         return ret;
     }
 
-    public static boolean addToDo(ToDo todo) {
-        if (size == MAX_SIZE) return true;
+    public static void addToDo(ToDo todo) {
+        if (size == MAX_SIZE) {
+            throw new IndexOutOfBoundsException("add: ToDo index out of bound");
+        }
         todoList[size++] = todo;
-        return false;
     }
 
-    public static boolean markToDo(int id) {
-        if (id < 0 || id >= size) return true;
+    public static void markToDo(int id) {
+        if (id < 0 || id >= size) {
+            throw new IndexOutOfBoundsException("mark: ToDo index out of bound");
+        }
         todoList[id].setDone(true);
-        return false;
     }
 
-    public static boolean unmarkToDo(int id) {
-        if (id < 0 || id >= size) return true;
+    public static void unmarkToDo(int id) {
+        if (id < 0 || id >= size) {
+            throw new IndexOutOfBoundsException("unmark: ToDo index out of bound");
+        }
         todoList[id].setDone(false);
-        return false;
     }
 }
