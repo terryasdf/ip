@@ -17,6 +17,12 @@ public class Cmd {
         this.optArgList = new ArrayList<>();
     }
 
+    @Override
+    public String toString() {
+        if (optArgList.isEmpty()) return keyword.toString();
+        return keyword + " " + CmdOptArg.parseString(optArgList);
+    }
+
     public CmdKeyword getKeyword() {
         return keyword;
     }

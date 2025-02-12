@@ -5,11 +5,11 @@ package terry.exception;
  */
 public class UnknownCmdKeywordException extends Exception {
 
-    private static final String ERROR_MSG = "Uh oh, unknown keyword: ";
+    private static final String MSG = "Uh oh, unknown keyword: ";
     private final String keyword;
 
     public UnknownCmdKeywordException(String keyword) {
-        super(ERROR_MSG);
+        super(MSG);
         this.keyword = keyword;
     }
 

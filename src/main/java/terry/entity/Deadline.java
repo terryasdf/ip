@@ -1,6 +1,9 @@
 package terry.entity;
 
 import terry.cmd.CmdOptArg;
+import terry.exception.MissingOptArgException;
+
+import java.util.List;
 
 /**
  * Stores {@link ToDo} with a deadline.
@@ -34,7 +37,7 @@ public class Deadline extends ToDo {
      *  <li>"": description</li>
      *  <li>"by": deadline</li>
      */
-    public static Deadline parse(CmdOptArg[] optArgList) {
+    public static Deadline parse(List<CmdOptArg> optArgList) throws MissingOptArgException {
         checkArgCount(optArgList, 2);
         String description = null;
         String ddlTime = null;
@@ -47,13 +50,10 @@ public class Deadline extends ToDo {
             }
         }
 
-        /**
-         * Parses a given list of {@link CmdOptArg} and returns a {@link ToDo} if possible.
-         */
         if (description == null) {
-            throw new IllegalArgumentException("No description provided.");
+            throw new MissingOptArgException(optArgList);
         } if (ddlTime == null) {
-            throw new IllegalArgumentException("No deadline provided.");
+            throw new MissingOptArgException(optArgList);
         }
         return new Deadline(description, ddlTime);
     }

@@ -1,5 +1,3 @@
-package terry;
-
 import terry.framework.Framework;
 
 public class Terry {

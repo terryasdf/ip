@@ -1,5 +1,7 @@
 package terry.cmd;
 
+import java.util.List;
+
 /**
  * Stores option-argument pairs.
  */
@@ -26,6 +28,12 @@ public class CmdOptArg {
     public CmdOptArg(String opt) {
         this.opt = opt;
         this.arg = "";
+    }
+
+    @Override
+    public String toString() {
+        if (arg.isEmpty()) return opt;
+        return opt + ' ' + arg;
     }
 
     public String getOpt() {
@@ -63,5 +71,18 @@ public class CmdOptArg {
      */
     public int parseInt() {
         return Integer.parseInt(arg);
+    }
+
+    /**
+     * Parses a {@link List} of arguments into {@code String}.
+     * <ul><li>Removes leading and trailing whitespaces</li>
+     */
+
+    public static String parseString(List<CmdOptArg> optArgList) {
+        StringBuilder ret = new StringBuilder();
+        for (CmdOptArg optArg : optArgList) {
+            ret.append(optArg).append(' ');
+        }
+        return ret.toString().strip();
     }
 }
