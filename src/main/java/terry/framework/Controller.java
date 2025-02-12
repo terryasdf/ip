@@ -26,7 +26,7 @@ public class Controller {
         StringBuilder ret = new StringBuilder();
         int cnt = 0;
         for (ToDo todo : todoList) {
-            ret.append(++cnt).append('.').append(todo.getDescription()).append('\n');
+            ret.append(++cnt).append('.').append(todo).append('\n');
         }
         return new Msg(ReturnStatus.SUCCESS, MsgString.LIST_TODO_MSG + "\n" + ret);
     }

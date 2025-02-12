@@ -77,7 +77,6 @@ public class CmdOptArg {
      * Parses a {@link List} of arguments into {@code String}.
      * <ul><li>Removes leading and trailing whitespaces</li>
      */
-
     public static String parseString(List<CmdOptArg> optArgList) {
         StringBuilder ret = new StringBuilder();
         for (CmdOptArg optArg : optArgList) {
