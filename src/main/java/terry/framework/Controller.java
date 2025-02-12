@@ -21,16 +21,16 @@ public class Controller {
 
 
     public static Msg getFormattedToDoInfoList() {
-        String[] infoList = Service.getFormattedToDoInfoList();
+        ToDo[] todoList = Service.getToDoList();
 
-        if (infoList.length == 0) {
+        if (todoList.length == 0) {
             return new Msg(ReturnStatus.SUCCESS, MsgString.LIST_TODO_NONE_MSG.toString());
         }
 
         StringBuilder ret = new StringBuilder();
         int cnt = 0;
-        for (String info : infoList) {
-            ret.append(++cnt).append('.').append(info).append('\n');
+        for (ToDo todo : todoList) {
+            ret.append(++cnt).append('.').append(todo.getDescription()).append('\n');
         }
         return new Msg(ReturnStatus.SUCCESS, MsgString.LIST_TODO_MSG + "\n" + ret.toString());
     }
@@ -50,7 +50,9 @@ public class Controller {
             String errorInfo = generateErrorInfo(CmdKeyword.CMD_MARK, "[PLACEHOLDER]some error");
             return new Msg(ReturnStatus.FAILED, generateInfo(MsgString.CMD_FAILED_MSG, errorInfo));
         }
-        String info = generateInfo(MsgString.MARK_TODO_MSG, Service.getFormattedToDoInfo(id));
+
+        ToDo moddedToDo = Service.getToDo(id);
+        String info = generateInfo(MsgString.MARK_TODO_MSG, moddedToDo.toString());
         return new Msg(ReturnStatus.SUCCESS, info);
     }
 
@@ -60,7 +62,9 @@ public class Controller {
             String errorInfo = generateErrorInfo(CmdKeyword.CMD_UNMARK, "[PLACEHOLDER]some error");
             return new Msg(ReturnStatus.FAILED, generateInfo(MsgString.CMD_FAILED_MSG, errorInfo));
         }
-        String info = generateInfo(MsgString.UNMARK_TODO_MSG, Service.getFormattedToDoInfo(id));
+
+        ToDo moddedToDo = Service.getToDo(id);
+        String info = generateInfo(MsgString.UNMARK_TODO_MSG, moddedToDo.toString());
         return new Msg(ReturnStatus.SUCCESS, info);
     }
 }

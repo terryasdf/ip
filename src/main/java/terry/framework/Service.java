@@ -4,6 +4,7 @@ import terry.entity.ToDo;
 
 /**
  * Has direct CRUD access to the todo list.
+ * <p>Returns unprocessed data.
  */
 
 public class Service {
@@ -13,15 +14,15 @@ public class Service {
 
     public static int getSize() { return size; }
 
-    public static String getFormattedToDoInfo(int id) {
-        if (id < 0 || id >= size) return "Invalid task id";
-        return todoList[id].toString();
+    public static ToDo getToDo(int id) {
+//        if (id < 0 || id >= size) return "Invalid task id";
+        return todoList[id];
     }
 
-    public static String[] getFormattedToDoInfoList() {
-        String[] ret = new String[size];
+    public static ToDo[] getToDoList() {
+        ToDo[] ret = new ToDo[size];
         for (int i = 0; i < size; ++i) {
-            ret[i] = todoList[i].toString();
+            ret[i] = todoList[i];
         }
         return ret;
     }
