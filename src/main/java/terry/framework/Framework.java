@@ -3,6 +3,7 @@ package terry.framework;
 import terry.exception.*;
 import terry.msg.MsgHandler;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -36,6 +37,8 @@ public class Framework {
                 ExceptionHandler.handleUnknownCmdKeywordException(e);
             } catch (NumberFormatException e) {
                 ExceptionHandler.handleNumberFormatException(e);
+            } catch (IOException e) {
+                ExceptionHandler.handleIOException(e);
             } catch (RuntimeException e) {
                 ExceptionHandler.handleRuntimeException(e);
             }

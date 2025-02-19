@@ -5,12 +5,15 @@ import terry.msg.Msg;
 import terry.msg.MsgString;
 import terry.msg.ReturnStatus;
 
+import java.io.IOException;
+
 /**
  * Calls {@link Service} methods.
  * <ul><li>Parses responses into {@link Msg}</li>
  */
-
 public class Controller {
+
+    private static final String SAVE_CSV_PATH = "saved/tasks.csv";
 
     private static String generateInfo(MsgString title, String description) {
         return title + "\n\t" + description;
@@ -54,6 +57,14 @@ public class Controller {
         Service.unmarkToDo(id);
         ToDo moddedToDo = Service.getToDo(id);
         String info = generateInfo(MsgString.UNMARK_TODO_MSG, moddedToDo.toString());
+        return new Msg(ReturnStatus.SUCCESS, info);
+    }
+
+    public static Msg saveCSV() throws IOException {
+        ToDo[] todoList = Service.getToDoList();
+        String content = FileHandler.parseToDoList2CSV(todoList);
+        String absolutePath = FileHandler.writeFile(SAVE_CSV_PATH, content);
+        String info = generateInfo(MsgString.SAVE_CSV_MSG, absolutePath);
         return new Msg(ReturnStatus.SUCCESS, info);
     }
 }

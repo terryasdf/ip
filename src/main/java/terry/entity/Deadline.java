@@ -11,6 +11,11 @@ import java.util.List;
 public class Deadline extends ToDo {
     private String ddlTime;
 
+    @Override
+    protected String[] generateParamList() {
+        return new String[]{"D", isDone ? "1" : "0", description, ddlTime};
+    }
+
     public Deadline(String description, String ddlTime) {
         super(description);
         this.ddlTime = ddlTime;

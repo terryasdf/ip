@@ -4,7 +4,7 @@ package terry.cmd;
  * Stores all available command keywords.
  */
 public enum CmdKeyword {
-    CMD_TODO, CMD_DDL, CMD_EVENT, CMD_LIST, CMD_EXIT, CMD_MARK, CMD_UNMARK, CMD_DELETE;
+    CMD_TODO, CMD_DDL, CMD_EVENT, CMD_LIST, CMD_EXIT, CMD_MARK, CMD_UNMARK, CMD_DELETE, CMD_SAVE;
 
     @Override
     public String toString() {
@@ -17,6 +17,7 @@ public enum CmdKeyword {
             case CMD_MARK -> "mark";
             case CMD_UNMARK -> "unmark";
             case CMD_DELETE -> "delete";
+            case CMD_SAVE -> "save";
         };
     }
 }
