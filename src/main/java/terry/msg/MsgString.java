@@ -4,6 +4,7 @@ package terry.msg;
  * Stores messages to be displayed.
  */
 public enum MsgString {
+    SAVE_CSV_MSG,
     SPLIT_LINE, GREETING_MSG, EXIT_MSG, ADD_TODO_MSG,
     LIST_TODO_MSG, LIST_TODO_NONE_MSG, MARK_TODO_MSG,
     UNMARK_TODO_MSG, NONE;
@@ -18,6 +19,7 @@ public enum MsgString {
             case LIST_TODO_NONE_MSG -> "Oops, I didn't find any todos.";
             case MARK_TODO_MSG -> "Task marked as done. Nice job.";
             case UNMARK_TODO_MSG -> "Task marked as not done.";
+            case SAVE_CSV_MSG -> "You can now access your saved tasks!";
             case NONE -> "";
             case GREETING_MSG -> "Ciallo!\n\n" +
                     "           ###.....###\n" +

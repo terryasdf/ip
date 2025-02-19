@@ -12,6 +12,7 @@ import terry.exception.UnknownCmdKeywordException;
 import terry.msg.Msg;
 import terry.msg.MsgHandler;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -28,7 +29,7 @@ public class CmdRunner {
      * <li>Returns a {@code false} signal if {@code CmdKeyword.CMD_EXIT} is executed</li>
      * <li>Otherwise returns {@code true}</li>
      */
-    public static boolean processAndExecuteCmd(String cmdInput) throws UnknownCmdKeywordException, MissingOptArgException {
+    public static boolean processAndExecuteCmd(String cmdInput) throws UnknownCmdKeywordException, MissingOptArgException, IOException {
         Cmd cmd = CmdParser.parseCmdInput(cmdInput);
         CmdKeyword keyword = cmd.getKeyword();
         ArrayList<CmdOptArg> optArgList = cmd.getOptArgList();
@@ -61,6 +62,8 @@ public class CmdRunner {
             ToDo todo = ToDo.parse(optArgList);
             MsgHandler.printMsgGeneric(Controller.addToDo(todo));
             break;
+        case CMD_SAVE:
+            MsgHandler.printMsgGeneric(Controller.saveCSV());
         }
 
         return true;

@@ -4,6 +4,8 @@ import terry.msg.Msg;
 import terry.msg.MsgHandler;
 import terry.msg.ReturnStatus;
 
+import java.io.IOException;
+
 /**
  * Handles multiple types of exceptions.
  */
@@ -33,6 +35,15 @@ public class ExceptionHandler {
      */
     public static void handleNumberFormatException(NumberFormatException e) {
         Msg msg = new Msg(ReturnStatus.FAILED, "Your argument is not a number:\n" + e.getMessage());
+        MsgHandler.printMsgGeneric(msg);
+    }
+
+    /**
+     * Handles {@link IOException} and displays an error {@link Msg} with
+     * {@code ReturnStatus.EXCEPTION_IO}.
+     */
+    public static void handleIOException(IOException e) {
+        Msg msg = new Msg(ReturnStatus.EXCEPTION_IO, "Cannot access the file:\n" + e.getMessage());
         MsgHandler.printMsgGeneric(msg);
     }
 

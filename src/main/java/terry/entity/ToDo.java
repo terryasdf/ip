@@ -18,6 +18,10 @@ public class ToDo {
         }
     }
 
+    protected String[] generateParamList() {
+        return new String[]{"T", isDone ? "1" : "0", description};
+    }
+
     public ToDo(String description) {
         this.description = description;
         this.isDone = false;
@@ -43,6 +47,11 @@ public class ToDo {
     public String toString() {
         String doneStatus = "[T][" + (isDone ? 'X' : ' ') + "] ";
         return doneStatus + " " + description;
+    }
+
+    public String generateCSV() {
+        String[] params = generateParamList();
+        return String.join(",", params);
     }
 
     /**
