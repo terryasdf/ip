@@ -61,6 +61,9 @@ public class CmdRunner {
             ToDo todo = ToDo.parse(optArgList);
             MsgHandler.printMsgGeneric(Controller.addToDo(todo));
             break;
+        case CMD_DELETE:
+            if (listSize == 0) throw new MissingOptArgException(optArgList);
+            MsgHandler.printMsgGeneric(Controller.deleteToDo(optArgList.iterator().next().parseInt() - 1));
         }
 
         return true;

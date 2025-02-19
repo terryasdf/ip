@@ -37,6 +37,12 @@ public class Controller {
         return new Msg(ReturnStatus.SUCCESS, info);
     }
 
+    public static Msg deleteToDo(int id) {
+        ToDo ret = Service.deleteToDo(id);
+        String info = generateInfo(MsgString.DELETE_TODO_MSG, ret.toString());
+        return new Msg(ReturnStatus.SUCCESS, info);
+    }
+
     public static Msg markToDo(int id) {
         Service.markToDo(id);
         ToDo moddedToDo = Service.getToDo(id);
