@@ -13,7 +13,8 @@ public enum MsgString {
     LIST_TODO_NONE_MSG,
     MARK_TODO_MSG,
     UNMARK_TODO_MSG,
-    SAVE_CSV_MSG,
+    SAVE_FILE_MSG,
+    LOAD_FILE_MSG,
     NONE;
 
     @Override
@@ -27,7 +28,8 @@ public enum MsgString {
             case LIST_TODO_NONE_MSG -> "Oops, I didn't find any todos.";
             case MARK_TODO_MSG -> "Task marked as done. Nice job.";
             case UNMARK_TODO_MSG -> "Task marked as not done.";
-            case SAVE_CSV_MSG -> "You can now access your saved tasks!";
+            case SAVE_FILE_MSG -> "You can now access your saved tasks!";
+            case LOAD_FILE_MSG -> "Saved tasks successfully loaded.";
             case NONE -> "";
             case GREETING_MSG -> """
                     Ciallo!

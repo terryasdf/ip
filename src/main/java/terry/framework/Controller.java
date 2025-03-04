@@ -1,11 +1,17 @@
 package terry.framework;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import terry.entity.Deadline;
+import terry.entity.Event;
 import terry.entity.ToDo;
+import terry.exception.ExceptionHandler;
 import terry.msg.Msg;
 import terry.msg.MsgString;
 import terry.msg.ReturnStatus;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -63,14 +69,39 @@ public class Controller {
     }
 
     /**
-     * Saves the todo list into a json file.
+     * Loads a JSON array from the file and parses to the todo list.
+     * @throws FileNotFoundException Failure of finding the specified file.
+     * */
+    public static Msg readFile() throws FileNotFoundException {
+        JSONArray jsonArray = FileHandler.readFile(SAVE_FILE_PATH);
+        int len = jsonArray.length();
+        for (int i = 0; i < len; ++i) {
+            try {
+                JSONObject json = jsonArray.getJSONObject(i);
+                String todoType = json.getString("type");
+                ToDo todo = switch (todoType) {
+                    case "T" -> ToDo.fromJSON(json);
+                    case "D" -> Deadline.fromJSON(json);
+                    case "E" -> Event.fromJSON(json);
+                    default -> throw new JSONException("Unrecognized todo type in your save: " + todoType);
+                };
+                Service.addToDo(todo);
+            } catch (JSONException e) {
+                ExceptionHandler.handleRuntimeException(e);
+            }
+        }
+        return new Msg(ReturnStatus.SUCCESS, MsgString.LOAD_FILE_MSG.toString());
+    }
+
+    /**
+     * Saves the todo list into a JSON file.
      * @throws IOException Failures of accessing files.
      * */
     public static Msg saveFile() throws IOException {
         ToDo[] todoList = Service.getToDoList();
         JSONArray content = new JSONArray(Arrays.stream(todoList).map(ToDo::toJSON).toList());
         String absolutePath = FileHandler.writeFile(SAVE_FILE_PATH, content);
-        String info = generateInfo(MsgString.SAVE_CSV_MSG, absolutePath);
+        String info = generateInfo(MsgString.SAVE_FILE_MSG, absolutePath);
         return new Msg(ReturnStatus.SUCCESS, info);
     }
 }

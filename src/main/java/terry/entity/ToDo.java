@@ -61,6 +61,9 @@ public class ToDo {
         return json;
     }
 
+    /**
+     * @deprecated JSON is now used for storing todo.
+     * */
     public String generateCSV() {
         String[] params = generateParamList();
         return String.join(",", params);
