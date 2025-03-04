@@ -1,5 +1,6 @@
 package terry.entity;
 
+import org.json.JSONObject;
 import terry.cmd.CmdOptArg;
 import terry.exception.MissingOptArgException;
 
@@ -19,6 +20,12 @@ public class Event extends ToDo {
 
     public Event(String description, String startTime, String endTime) {
         super(description);
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
+    public Event(String description, Boolean isDone, String startTime, String endTime) {
+        super(description, isDone);
         this.startTime = startTime;
         this.endTime = endTime;
     }
@@ -45,6 +52,13 @@ public class Event extends ToDo {
         String from = " <from: " + startTime + ">";
         String to = " <to: " + endTime + ">";
         return doneStatus + " " + description + from + to;
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject(this);
+        json.put("type", "E");
+        return json;
     }
 
     /**
@@ -78,5 +92,13 @@ public class Event extends ToDo {
             throw new MissingOptArgException(optArgList);
         }
         return new Event(description, startTime, endTime);
+    }
+
+    public static Event fromJSON(JSONObject json) {
+        String description = json.getString("description");
+        Boolean isDone = json.getBoolean("done");
+        String startTime = json.getString("startTime");
+        String endTime = json.getString("endTime");
+        return new Event(description, isDone, startTime, endTime);
     }
 }

@@ -67,7 +67,7 @@ public class CmdRunner {
             MsgHandler.printMsgGeneric(Controller.deleteToDo(optArgList.iterator().next().parseInt() - 1));
             break;
         case CMD_SAVE:
-            MsgHandler.printMsgGeneric(Controller.saveCSV());
+            MsgHandler.printMsgGeneric(Controller.saveFile());
             break;
         }
 

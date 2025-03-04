@@ -1,5 +1,6 @@
 package terry.entity;
 
+import org.json.JSONObject;
 import terry.cmd.CmdOptArg;
 import terry.exception.MissingOptArgException;
 
@@ -27,6 +28,11 @@ public class ToDo {
         this.isDone = false;
     }
 
+    public ToDo(String description, Boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -49,6 +55,12 @@ public class ToDo {
         return doneStatus + " " + description;
     }
 
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject(this);
+        json.put("type", "T");
+        return json;
+    }
+
     public String generateCSV() {
         String[] params = generateParamList();
         return String.join(",", params);
@@ -66,5 +78,11 @@ public class ToDo {
             throw new MissingOptArgException(optArgList);
         }
         return new ToDo(description);
+    }
+
+     public static ToDo fromJSON(JSONObject json) {
+        String description = json.getString("description");
+        Boolean isDone = json.getBoolean("done");
+        return new ToDo(description, isDone);
     }
 }

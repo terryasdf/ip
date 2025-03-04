@@ -1,11 +1,13 @@
 package terry.framework;
 
+import org.json.JSONArray;
 import terry.entity.ToDo;
 import terry.msg.Msg;
 import terry.msg.MsgString;
 import terry.msg.ReturnStatus;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Calls {@link Service} methods.
@@ -13,7 +15,7 @@ import java.io.IOException;
  */
 public class Controller {
 
-    private static final String SAVE_CSV_PATH = "saved/tasks.csv";
+    private static final String SAVE_FILE_PATH = "saved/tasks.json";
 
     private static String generateInfo(MsgString title, String description) {
         return title + "\n\t" + description;
@@ -60,10 +62,14 @@ public class Controller {
         return new Msg(ReturnStatus.SUCCESS, info);
     }
 
-    public static Msg saveCSV() throws IOException {
+    /**
+     * Saves the todo list into a json file.
+     * @throws IOException Failures of accessing files.
+     * */
+    public static Msg saveFile() throws IOException {
         ToDo[] todoList = Service.getToDoList();
-        String content = FileHandler.parseToDoList2CSV(todoList);
-        String absolutePath = FileHandler.writeFile(SAVE_CSV_PATH, content);
+        JSONArray content = new JSONArray(Arrays.stream(todoList).map(ToDo::toJSON).toList());
+        String absolutePath = FileHandler.writeFile(SAVE_FILE_PATH, content);
         String info = generateInfo(MsgString.SAVE_CSV_MSG, absolutePath);
         return new Msg(ReturnStatus.SUCCESS, info);
     }

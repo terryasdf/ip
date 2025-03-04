@@ -1,5 +1,6 @@
 package terry.entity;
 
+import org.json.JSONObject;
 import terry.cmd.CmdOptArg;
 import terry.exception.MissingOptArgException;
 
@@ -21,6 +22,11 @@ public class Deadline extends ToDo {
         this.ddlTime = ddlTime;
     }
 
+    public Deadline(String description, Boolean isDone, String ddlTime) {
+        super(description, isDone);
+        this.ddlTime = ddlTime;
+    }
+
     public String getDdlTime() {
         return ddlTime;
     }
@@ -34,6 +40,13 @@ public class Deadline extends ToDo {
         String doneStatus = "[D][" + (isDone ? 'X' : ' ') + "] ";
         String by = " <by: " + ddlTime + ">";
         return doneStatus + " " + description + by;
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject(this);
+        json.put("type", "D");
+        return json;
     }
 
     /**
@@ -61,5 +74,12 @@ public class Deadline extends ToDo {
             throw new MissingOptArgException(optArgList);
         }
         return new Deadline(description, ddlTime);
+    }
+
+    public static Deadline fromJSON(JSONObject json) {
+        String description = json.getString("description");
+        Boolean isDone = json.getBoolean("done");
+        String ddlTime = json.getString("ddlTime");
+        return new Deadline(description, isDone, ddlTime);
     }
 }
