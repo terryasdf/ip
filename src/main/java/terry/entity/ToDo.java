@@ -13,14 +13,15 @@ public class ToDo {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Checks if a list of {@link CmdOptArg} has enough number of options.
+     * @exception MissingOptArgException when parameter count is less than
+     * {@code leastCount}
+     * */
     protected static void checkArgCount(List<CmdOptArg> optArgList, int leastCount) throws MissingOptArgException {
         if (optArgList.size() < leastCount) {
             throw new MissingOptArgException(optArgList);
         }
-    }
-
-    protected String[] generateParamList() {
-        return new String[]{"T", isDone ? "1" : "0", description};
     }
 
     public ToDo(String description) {
@@ -59,14 +60,6 @@ public class ToDo {
         JSONObject json = new JSONObject(this);
         json.put("type", "T");
         return json;
-    }
-
-    /**
-     * @deprecated JSON is now used for storing todo.
-     * */
-    public String generateCSV() {
-        String[] params = generateParamList();
-        return String.join(",", params);
     }
 
     /**

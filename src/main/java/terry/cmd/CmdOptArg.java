@@ -53,7 +53,7 @@ public class CmdOptArg {
     }
 
     /**
-     * Check if a {@code String} corresponds to {@code opt}.
+     * Checks if a {@code String} corresponds to {@code opt}.
      * <p>Returns {@code true} if the given option is a prefix of {@code opt}.
      * <ul>
      *     <li>If {@code opt} is empty and the given one is also empty, return {@code true}</li>

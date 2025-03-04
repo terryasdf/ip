@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Parses command lines. Contains a {@link CmdKeyword} and a list of {@link CmdOptArg}.
  */
 public class Cmd {
-    private CmdKeyword keyword;
+    private final CmdKeyword keyword;
     private final ArrayList<CmdOptArg> optArgList;
 
     /**
@@ -25,10 +25,6 @@ public class Cmd {
 
     public CmdKeyword getKeyword() {
         return keyword;
-    }
-
-    public void setKeyword(CmdKeyword keyword) {
-        this.keyword = keyword;
     }
 
     public ArrayList<CmdOptArg> getOptArgList() {

@@ -13,11 +13,6 @@ public class Event extends ToDo {
     private String startTime;
     private String endTime;
 
-    @Override
-    protected String[] generateParamList() {
-        return new String[]{"E", isDone ? "1" : "0", description, startTime, endTime};
-    }
-
     public Event(String description, String startTime, String endTime) {
         super(description);
         this.startTime = startTime;
