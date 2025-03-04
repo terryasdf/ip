@@ -13,7 +13,8 @@ public enum CmdKeyword {
     CMD_UNMARK,
     CMD_DELETE,
     CMD_SAVE,
-    CMD_LOAD;
+    CMD_LOAD,
+    CMD_FIND;
 
     @Override
     public String toString() {
@@ -28,6 +29,7 @@ public enum CmdKeyword {
             case CMD_DELETE -> "delete";
             case CMD_SAVE -> "save";
             case CMD_LOAD -> "load";
+            case CMD_FIND -> "find";
         };
     }
 }

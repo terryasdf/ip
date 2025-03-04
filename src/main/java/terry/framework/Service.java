@@ -8,7 +8,6 @@ import java.util.ArrayList;
  * Has direct CRUD access to the todo list.
  * <ul><li>Returns unprocessed data</li>
  */
-
 public class Service {
 
     private static final int MAX_SIZE = 100;
@@ -25,8 +24,8 @@ public class Service {
         return todoList.get(id);
     }
 
-    public static ToDo[] getToDoList() {
-        return todoList.toArray(ToDo[]::new);
+    public static ArrayList<ToDo> getToDoList() {
+        return todoList;
     }
 
     public static void addToDo(ToDo todo) {
@@ -49,5 +48,15 @@ public class Service {
     public static void unmarkToDo(int id) {
         checkIndex(id);
         todoList.get(id).setDone(false);
+    }
+
+    public static ArrayList<ToDo> findToDoByKeyword(String keyword) {
+        ArrayList<ToDo> ret = new ArrayList<>();
+        for (ToDo todo : todoList) {
+            if (!todo.getDescription().contains(keyword))
+                continue;
+            ret.add(todo);
+        }
+        return ret;
     }
 }
