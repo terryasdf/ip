@@ -3,14 +3,12 @@ package terry.framework;
 import terry.cmd.Cmd;
 import terry.cmd.CmdKeyword;
 import terry.cmd.CmdOptArg;
-import terry.cmd.CmdParser;
 import terry.entity.Deadline;
 import terry.entity.Event;
 import terry.entity.ToDo;
 import terry.exception.ExceptionHandler;
 import terry.exception.MissingOptArgException;
 import terry.exception.OptArgException;
-import terry.exception.UnknownCmdKeywordException;
 import terry.msg.Msg;
 import terry.msg.MsgHandler;
 
@@ -40,7 +38,7 @@ public class CmdRunner {
                 MsgHandler.printExitMsg();
                 return false;
             case CMD_LIST:
-                MsgHandler.printMsgGeneric(Controller.getFormattedToDoInfoList());
+                MsgHandler.printMsgGeneric(Controller.getToDoList());
                 break;
             case CMD_MARK:
                 if (listSize == 0) throw new MissingOptArgException(optArgList);
@@ -49,6 +47,10 @@ public class CmdRunner {
             case CMD_UNMARK:
                 if (listSize == 0) throw new MissingOptArgException(optArgList);
                 MsgHandler.printMsgGeneric(Controller.unmarkToDo(optArgList.iterator().next().parseInt() - 1));
+                break;
+            case CMD_FIND:
+                if (listSize == 0) throw new MissingOptArgException(optArgList);
+                MsgHandler.printMsgGeneric(Controller.findToDoByKeyword(optArgList.iterator().next().getArg()));
                 break;
             case CMD_DDL:
                 Deadline ddl = Deadline.parse(optArgList);

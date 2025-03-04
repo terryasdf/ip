@@ -13,7 +13,8 @@ import terry.msg.ReturnStatus;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Calls {@link Service} methods.
@@ -27,19 +28,23 @@ public class Controller {
         return title + "\n\t" + description;
     }
 
-    public static Msg getFormattedToDoInfoList() {
-        ToDo[] todoList = Service.getToDoList();
-
-        if (todoList.length == 0) {
-            return new Msg(ReturnStatus.SUCCESS, MsgString.LIST_TODO_NONE_MSG.toString());
-        }
-
+    private static String generateFormattedToDoInfoList(List<ToDo> todoList) {
         StringBuilder ret = new StringBuilder();
         int cnt = 0;
         for (ToDo todo : todoList) {
             ret.append(++cnt).append('.').append(todo).append('\n');
         }
-        return new Msg(ReturnStatus.SUCCESS, MsgString.LIST_TODO_MSG + "\n" + ret);
+        return ret.toString();
+    }
+
+    public static Msg getToDoList() {
+        ArrayList<ToDo> todoList = Service.getToDoList();
+        if (todoList.size() == 0) {
+            return new Msg(ReturnStatus.SUCCESS, MsgString.LIST_TODO_NONE_MSG.toString());
+        }
+
+        String content = generateFormattedToDoInfoList(todoList);
+        return new Msg(ReturnStatus.SUCCESS, MsgString.LIST_TODO_MSG + "\n" + content);
     }
 
     public static Msg addToDo(ToDo todo) {
@@ -66,6 +71,16 @@ public class Controller {
         ToDo moddedToDo = Service.getToDo(id);
         String info = generateInfo(MsgString.UNMARK_TODO_MSG, moddedToDo.toString());
         return new Msg(ReturnStatus.SUCCESS, info);
+    }
+
+    public static Msg findToDoByKeyword(String keyword) {
+        ArrayList<ToDo> todoList = Service.findToDoByKeyword(keyword);
+        if (todoList.size() == 0) {
+            return new Msg(ReturnStatus.SUCCESS, MsgString.LIST_TODO_NONE_MSG.toString());
+        }
+
+        String content = generateFormattedToDoInfoList(todoList);
+        return new Msg(ReturnStatus.SUCCESS, MsgString.LIST_TODO_MSG + "\n" + content);
     }
 
     /**
@@ -98,8 +113,8 @@ public class Controller {
      * @throws IOException Failures of accessing files.
      * */
     public static Msg saveFile() throws IOException {
-        ToDo[] todoList = Service.getToDoList();
-        JSONArray content = new JSONArray(Arrays.stream(todoList).map(ToDo::toJSON).toList());
+        ArrayList<ToDo> todoList = Service.getToDoList();
+        JSONArray content = new JSONArray(todoList.stream().map(ToDo::toJSON).toList());
         String absolutePath = FileHandler.writeFile(SAVE_FILE_PATH, content);
         String info = generateInfo(MsgString.SAVE_FILE_MSG, absolutePath);
         return new Msg(ReturnStatus.SUCCESS, info);
