@@ -16,19 +16,6 @@ import java.util.Scanner;
 public class FileHandler {
 
     /**
-     * Parses a list of {@link ToDo} to a string in CSV format.
-     * @return a {@link String} in CSV format.
-     * @deprecated JSON is now used for storing todo list.
-     */
-    public static String parseToDoList2CSV(ToDo[] todoList) {
-        StringBuilder ret = new StringBuilder();
-        for (ToDo todo : todoList) {
-            ret.append(todo.generateCSV()).append("\n");
-        }
-        return ret.toString();
-    }
-
-    /**
      * Reads and load a {@link JSONArray} from a file.
      * @param path The relative path of a file.
      * @return A parsed {@link JSONArray}.
