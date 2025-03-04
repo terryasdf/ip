@@ -3,7 +3,6 @@ package terry.msg;
 /**
  * Stores the status and detailed info of a response.
  */
-
 public class Msg {
 
     /**
