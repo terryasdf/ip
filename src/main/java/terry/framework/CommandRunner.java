@@ -41,22 +41,19 @@ public class CommandRunner {
                 MessageHandler.printMessageGeneric(Controller.getToDoList());
                 break;
             case CMD_MARK:
-                if (listSize == 0) {
-                    throw new MissingOptionException(optArgList);
-                }
-                MessageHandler.printMessageGeneric(Controller.markToDo(optArgList.iterator().next().parseInt() - 1));
+                CommandOptionArgument.assertLeastOptionCount(optArgList, 1);
+                MessageHandler.printMessageGeneric(Controller.markToDo(
+                        optArgList.iterator().next().parseInt() - 1));
                 break;
             case CMD_UNMARK:
-                if (listSize == 0) {
-                    throw new MissingOptionException(optArgList);
-                }
-                MessageHandler.printMessageGeneric(Controller.unmarkToDo(optArgList.iterator().next().parseInt() - 1));
+                CommandOptionArgument.assertLeastOptionCount(optArgList, 1);
+                MessageHandler.printMessageGeneric(Controller.unmarkToDo(
+                        optArgList.iterator().next().parseInt() - 1));
                 break;
             case CMD_FIND:
-                if (listSize == 0) {
-                    throw new MissingOptionException(optArgList);
-                }
-                MessageHandler.printMessageGeneric(Controller.findToDoByKeyword(optArgList.iterator().next().getArg()));
+                CommandOptionArgument.assertLeastOptionCount(optArgList, 1);
+                MessageHandler.printMessageGeneric(Controller.findToDoByKeyword(
+                        optArgList.iterator().next().getArg()));
                 break;
             case CMD_DDL:
                 Deadline ddl = Deadline.parse(optArgList);
@@ -71,10 +68,9 @@ public class CommandRunner {
                 MessageHandler.printMessageGeneric(Controller.addToDo(todo));
                 break;
             case CMD_DELETE:
-                if (listSize == 0) {
-                    throw new MissingOptionException(optArgList);
-                }
-                MessageHandler.printMessageGeneric(Controller.deleteToDo(optArgList.iterator().next().parseInt() - 1));
+                CommandOptionArgument.assertLeastOptionCount(optArgList, 1);
+                MessageHandler.printMessageGeneric(Controller.deleteToDo(
+                        optArgList.iterator().next().parseInt() - 1));
                 break;
             case CMD_SAVE:
                 MessageHandler.printMessageGeneric(Controller.saveFile());

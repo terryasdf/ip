@@ -51,7 +51,8 @@ public class Deadline extends ToDo {
      *  <li>"by": deadline</li>
      */
     public static Deadline parse(List<CommandOptionArgument> optArgList) throws MissingOptionException {
-        checkArgCount(optArgList, 2);
+        CommandOptionArgument.assertLeastOptionCount(optArgList, 2);
+
         String description = null;
         String ddlTime = null;
 

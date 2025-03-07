@@ -64,11 +64,12 @@ public class Event extends ToDo {
      *  <li>"to": end time</li>
      */
     public static Event parse(List<CommandOptionArgument> optArgList) throws MissingOptionException {
-        checkArgCount(optArgList, 3);
+        CommandOptionArgument.assertLeastOptionCount(optArgList, 3);
 
         String description = null;
         String startTime = null;
         String endTime = null;
+
         for (CommandOptionArgument optArg : optArgList) {
             if (optArg.isOpt("")) {
                 description = optArg.getArg();

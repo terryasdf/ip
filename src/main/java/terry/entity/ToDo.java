@@ -13,18 +13,6 @@ public class ToDo {
     protected String description;
     protected boolean isDone;
 
-    /**
-     * Checks if a list of {@link CommandOptionArgument} has enough number of options.
-     * @exception MissingOptionException when parameter count is less than
-     * {@code leastCount}
-     * */
-    protected static void checkArgCount(List<CommandOptionArgument> optArgList, int leastCount)
-            throws MissingOptionException {
-        if (optArgList.size() < leastCount) {
-            throw new MissingOptionException(optArgList);
-        }
-    }
-
     public ToDo(String description) {
         this.description = description;
         this.isDone = false;
@@ -69,9 +57,9 @@ public class ToDo {
      *  <li>"": description</li>
      */
     public static ToDo parse(List<CommandOptionArgument> optArgList) throws MissingOptionException {
-        checkArgCount(optArgList, 1);
-        String description = optArgList.iterator().next().getArg();
+        CommandOptionArgument.assertLeastOptionCount(optArgList, 1);
 
+        String description = optArgList.iterator().next().getArg();
         if (description.isEmpty()) {
             throw new MissingOptionException(optArgList);
         }

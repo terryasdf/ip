@@ -1,5 +1,7 @@
 package terry.command;
 
+import terry.exception.MissingOptionException;
+
 import java.util.List;
 
 /**
@@ -85,5 +87,17 @@ public class CommandOptionArgument {
             ret.append(optArg).append(' ');
         }
         return ret.toString().strip();
+    }
+
+    /**
+     * Checks if a list of {@link CommandOptionArgument} has enough number of options.
+     * @exception MissingOptionException when parameter count is less than
+     * {@code leastCount}
+     * */
+    public static void assertLeastOptionCount(List<CommandOptionArgument> optArgList, int leastCount)
+            throws MissingOptionException {
+        if (optArgList.size() < leastCount) {
+            throw new MissingOptionException(optArgList);
+        }
     }
 }
