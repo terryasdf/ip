@@ -7,9 +7,9 @@ import terry.entity.Deadline;
 import terry.entity.Event;
 import terry.entity.ToDo;
 import terry.exception.ExceptionHandler;
-import terry.msg.Msg;
-import terry.msg.MsgString;
-import terry.msg.ReturnStatus;
+import terry.message.Message;
+import terry.message.MessageString;
+import terry.message.ReturnStatus;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -18,13 +18,13 @@ import java.util.List;
 
 /**
  * Calls {@link Service} methods.
- * <ul><li>Parses responses into {@link Msg}</li>
+ * <ul><li>Parses responses into {@link Message}</li>
  */
 public class Controller {
 
     private static final String SAVE_FILE_PATH = "saved/tasks.json";
 
-    private static String generateInfo(MsgString title, String description) {
+    private static String generateInfo(MessageString title, String description) {
         return title + "\n\t" + description;
     }
 
@@ -37,57 +37,57 @@ public class Controller {
         return ret.toString();
     }
 
-    public static Msg getToDoList() {
+    public static Message getToDoList() {
         ArrayList<ToDo> todoList = Service.getToDoList();
         if (todoList.size() == 0) {
-            return new Msg(ReturnStatus.SUCCESS, MsgString.LIST_TODO_NONE_MSG.toString());
+            return new Message(ReturnStatus.SUCCESS, MessageString.LIST_TODO_NONE_MSG.toString());
         }
 
         String content = generateFormattedToDoInfoList(todoList);
-        return new Msg(ReturnStatus.SUCCESS, MsgString.LIST_TODO_MSG + "\n" + content);
+        return new Message(ReturnStatus.SUCCESS, MessageString.LIST_TODO_MSG + "\n" + content);
     }
 
-    public static Msg addToDo(ToDo todo) {
+    public static Message addToDo(ToDo todo) {
         Service.addToDo(todo);
-        String info = generateInfo(MsgString.ADD_TODO_MSG, todo.toString());
-        return new Msg(ReturnStatus.SUCCESS, info);
+        String info = generateInfo(MessageString.ADD_TODO_MSG, todo.toString());
+        return new Message(ReturnStatus.SUCCESS, info);
     }
 
-    public static Msg deleteToDo(int id) {
+    public static Message deleteToDo(int id) {
         ToDo ret = Service.deleteToDo(id);
-        String info = generateInfo(MsgString.DELETE_TODO_MSG, ret.toString());
-        return new Msg(ReturnStatus.SUCCESS, info);
+        String info = generateInfo(MessageString.DELETE_TODO_MSG, ret.toString());
+        return new Message(ReturnStatus.SUCCESS, info);
     }
 
-    public static Msg markToDo(int id) {
+    public static Message markToDo(int id) {
         Service.markToDo(id);
         ToDo moddedToDo = Service.getToDo(id);
-        String info = generateInfo(MsgString.MARK_TODO_MSG, moddedToDo.toString());
-        return new Msg(ReturnStatus.SUCCESS, info);
+        String info = generateInfo(MessageString.MARK_TODO_MSG, moddedToDo.toString());
+        return new Message(ReturnStatus.SUCCESS, info);
     }
 
-    public static Msg unmarkToDo(int id) {
+    public static Message unmarkToDo(int id) {
         Service.unmarkToDo(id);
         ToDo moddedToDo = Service.getToDo(id);
-        String info = generateInfo(MsgString.UNMARK_TODO_MSG, moddedToDo.toString());
-        return new Msg(ReturnStatus.SUCCESS, info);
+        String info = generateInfo(MessageString.UNMARK_TODO_MSG, moddedToDo.toString());
+        return new Message(ReturnStatus.SUCCESS, info);
     }
 
-    public static Msg findToDoByKeyword(String keyword) {
+    public static Message findToDoByKeyword(String keyword) {
         ArrayList<ToDo> todoList = Service.findToDoByKeyword(keyword);
         if (todoList.size() == 0) {
-            return new Msg(ReturnStatus.SUCCESS, MsgString.LIST_TODO_NONE_MSG.toString());
+            return new Message(ReturnStatus.SUCCESS, MessageString.LIST_TODO_NONE_MSG.toString());
         }
 
         String content = generateFormattedToDoInfoList(todoList);
-        return new Msg(ReturnStatus.SUCCESS, MsgString.LIST_TODO_MSG + "\n" + content);
+        return new Message(ReturnStatus.SUCCESS, MessageString.LIST_TODO_MSG + "\n" + content);
     }
 
     /**
      * Loads a JSON array from the file and parses to the todo list.
      * @throws FileNotFoundException Failure of finding the specified file.
      * */
-    public static Msg readFile() throws FileNotFoundException {
+    public static Message readFile() throws FileNotFoundException {
         JSONArray jsonArray = FileHandler.readFile(SAVE_FILE_PATH);
         int len = jsonArray.length();
         for (int i = 0; i < len; ++i) {
@@ -105,18 +105,18 @@ public class Controller {
                 ExceptionHandler.handleRuntimeException(e);
             }
         }
-        return new Msg(ReturnStatus.SUCCESS, MsgString.LOAD_FILE_MSG.toString());
+        return new Message(ReturnStatus.SUCCESS, MessageString.LOAD_FILE_MSG.toString());
     }
 
     /**
      * Saves the todo list into a JSON file.
      * @throws IOException Failures of accessing files.
      * */
-    public static Msg saveFile() throws IOException {
+    public static Message saveFile() throws IOException {
         ArrayList<ToDo> todoList = Service.getToDoList();
         JSONArray content = new JSONArray(todoList.stream().map(ToDo::toJSON).toList());
         String absolutePath = FileHandler.writeFile(SAVE_FILE_PATH, content);
-        String info = generateInfo(MsgString.SAVE_FILE_MSG, absolutePath);
-        return new Msg(ReturnStatus.SUCCESS, info);
+        String info = generateInfo(MessageString.SAVE_FILE_MSG, absolutePath);
+        return new Message(ReturnStatus.SUCCESS, info);
     }
 }

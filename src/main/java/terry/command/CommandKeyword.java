@@ -1,9 +1,9 @@
-package terry.cmd;
+package terry.command;
 
 /**
  * Stores all available command keywords.
  */
-public enum CmdKeyword {
+public enum CommandKeyword {
     CMD_TODO,
     CMD_DDL,
     CMD_EVENT,

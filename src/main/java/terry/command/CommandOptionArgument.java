@@ -1,4 +1,6 @@
-package terry.cmd;
+package terry.command;
+
+import terry.exception.MissingOptionException;
 
 import java.util.List;
 
@@ -6,7 +8,7 @@ import java.util.List;
  * Stores option-argument pairs.
  */
 
-public class CmdOptArg {
+public class CommandOptionArgument {
 
     /**
      * Stores the option, {@code '-'} or {@code '/'} excluded.
@@ -17,7 +19,7 @@ public class CmdOptArg {
     /**
      * Constructs a {@code CmdOptArg} with empty {@code opt} and {@code arg}.
      */
-    public CmdOptArg() {
+    public CommandOptionArgument() {
         this.opt = "";
         this.arg = "";
     }
@@ -25,14 +27,16 @@ public class CmdOptArg {
     /**
      * Constructs a {@code CmdOptArg} with empty {@code arg}.
      */
-    public CmdOptArg(String opt) {
+    public CommandOptionArgument(String opt) {
         this.opt = opt;
         this.arg = "";
     }
 
     @Override
     public String toString() {
-        if (arg.isEmpty()) return opt;
+        if (arg.isEmpty()) {
+            return opt;
+        }
         return opt + ' ' + arg;
     }
 
@@ -77,11 +81,23 @@ public class CmdOptArg {
      * Parses a {@link List} of arguments into {@code String}.
      * <ul><li>Removes leading and trailing whitespaces</li>
      */
-    public static String parseString(List<CmdOptArg> optArgList) {
+    public static String parseString(List<CommandOptionArgument> optArgList) {
         StringBuilder ret = new StringBuilder();
-        for (CmdOptArg optArg : optArgList) {
+        for (CommandOptionArgument optArg : optArgList) {
             ret.append(optArg).append(' ');
         }
         return ret.toString().strip();
+    }
+
+    /**
+     * Checks if a list of {@link CommandOptionArgument} has enough number of options.
+     * @exception MissingOptionException when parameter count is less than
+     * {@code leastCount}
+     * */
+    public static void assertLeastOptionCount(List<CommandOptionArgument> optArgList, int leastCount)
+            throws MissingOptionException {
+        if (optArgList.size() < leastCount) {
+            throw new MissingOptionException(optArgList);
+        }
     }
 }

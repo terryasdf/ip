@@ -1,8 +1,8 @@
 package terry.entity;
 
 import org.json.JSONObject;
-import terry.cmd.CmdOptArg;
-import terry.exception.MissingOptArgException;
+import terry.command.CommandOptionArgument;
+import terry.exception.MissingOptionException;
 
 import java.util.List;
 
@@ -12,17 +12,6 @@ import java.util.List;
 public class ToDo {
     protected String description;
     protected boolean isDone;
-
-    /**
-     * Checks if a list of {@link CmdOptArg} has enough number of options.
-     * @exception MissingOptArgException when parameter count is less than
-     * {@code leastCount}
-     * */
-    protected static void checkArgCount(List<CmdOptArg> optArgList, int leastCount) throws MissingOptArgException {
-        if (optArgList.size() < leastCount) {
-            throw new MissingOptArgException(optArgList);
-        }
-    }
 
     public ToDo(String description) {
         this.description = description;
@@ -63,16 +52,18 @@ public class ToDo {
     }
 
     /**
-     * Parses a given {@link List} of {@link CmdOptArg} and returns a {@link ToDo} if possible.
+     * Parses a given {@link List} of {@link CommandOptionArgument} and returns a {@link ToDo} if possible.
      * <ul>Required options:
      *  <li>"": description</li>
      */
-    public static ToDo parse(List<CmdOptArg> optArgList) throws MissingOptArgException {
-        checkArgCount(optArgList, 1);
+    public static ToDo parse(List<CommandOptionArgument> optArgList) throws MissingOptionException {
+        CommandOptionArgument.assertLeastOptionCount(optArgList, 1);
+
         String description = optArgList.iterator().next().getArg();
         if (description.isEmpty()) {
-            throw new MissingOptArgException(optArgList);
+            throw new MissingOptionException(optArgList);
         }
+
         return new ToDo(description);
     }
 
