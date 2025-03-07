@@ -29,17 +29,15 @@ public class Framework {
         try (Scanner in = new Scanner(System.in)) {
             while (true) {
                 String cmdInput = in.nextLine().strip();
-                // Ignore empty input
                 if (cmdInput.length() == 0) {
-                    continue;
+                    continue; // Ignore empty input
                 }
 
                 try {
                     Command cmd = CommandParser.parseCommandInput(cmdInput);
                     if (CommandRunner.executeCommand(cmd)) {
-                        continue;
+                        return; // Shut down if "bye" signal received
                     }
-                    return; // Bye and shut down
                 } catch (UnknownCommandKeywordException e) {
                     ExceptionHandler.handleUnknownCommandKeywordException(e);
                 }

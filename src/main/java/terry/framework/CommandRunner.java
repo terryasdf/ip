@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class CommandRunner {
 
     /**
-     * Returns a {@code false} signal if {@code CmdKeyword.CMD_EXIT} is executed, otherwise returns {@code true}.
+     * Returns a {@code true} signal if {@code CmdKeyword.CMD_EXIT} is executed, otherwise returns {@code false}.
      * <ul>
      * <li>Calls {@link Controller} methods for data access</li>
      * <li>Shows {@link Message} via {@link MessageHandler}</li>
@@ -36,7 +36,7 @@ public class CommandRunner {
             switch (keyword) {
             case CMD_EXIT:
                 MessageHandler.printExitMessage();
-                return false;
+                return true;
             case CMD_LIST:
                 MessageHandler.printMessageGeneric(Controller.getToDoList());
                 break;
@@ -93,6 +93,6 @@ public class CommandRunner {
             ExceptionHandler.handleRuntimeException(e);
         }
 
-        return true;
+        return false;
     }
 }
