@@ -7,7 +7,6 @@ import terry.entity.Deadline;
 import terry.entity.Event;
 import terry.entity.ToDo;
 import terry.exception.ExceptionHandler;
-import terry.exception.MissingOptionException;
 import terry.exception.OptionArgumentException;
 import terry.message.Message;
 import terry.message.MessageHandler;
@@ -31,7 +30,6 @@ public class CommandRunner {
         try {
             CommandKeyword keyword = cmd.getKeyword();
             ArrayList<CommandOptionArgument> optArgList = cmd.getOptionArgumentList();
-            final int listSize = optArgList.size();
 
             switch (keyword) {
             case CMD_EXIT:

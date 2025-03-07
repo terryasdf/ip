@@ -16,7 +16,7 @@ public class ExceptionHandler {
      * {@code ReturnStatus.EXCEPTION_ARG}.
      */
     public static void handleOptionArgumentException(OptionArgumentException e) {
-        Message msg = new Message(ReturnStatus.EXCEPTION_CMD_OPTARG, e.getMessage());
+        Message msg = new Message(ReturnStatus.EXCEPTION_CMD_OPT_ARG, e.getMessage());
         MessageHandler.printMessageGeneric(msg);
     }
 

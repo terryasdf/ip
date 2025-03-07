@@ -10,12 +10,12 @@ import terry.message.MessageHandler;
 import java.util.Scanner;
 
 /**
- * The main Terry Chatbot CLI.
+ * The main Terry Chat Bot CLI.
  */
 public class Framework {
 
     /**
-     * Starts the Terry Chatbot.
+     * Starts the Terry Chat Bot.
      * <ul>
      * <li>Calls {@link CommandRunner} methods for data access</li>
      * <li>Handles CLI-wise exceptions via {@link ExceptionHandler}</li>

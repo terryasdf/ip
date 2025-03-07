@@ -1,8 +1,6 @@
 package terry.framework;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
-import terry.entity.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;

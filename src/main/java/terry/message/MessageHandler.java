@@ -21,7 +21,7 @@ public class MessageHandler {
      */
     public static void printMessageGeneric(Message msg) {
         System.out.println(MessageString.SPLIT_LINE);
-        System.out.println(msg.getInfo());
+        System.out.println(msg.info());
         System.out.println(MessageString.SPLIT_LINE);
     }
 }
