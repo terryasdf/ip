@@ -68,6 +68,7 @@ public class Deadline extends ToDo {
         } if (ddlTime == null) {
             throw new MissingOptionException(optArgList);
         }
+
         return new Deadline(description, ddlTime);
     }
 

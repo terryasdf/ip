@@ -19,7 +19,9 @@ public class Command {
 
     @Override
     public String toString() {
-        if (optArgList.isEmpty()) return keyword.toString();
+        if (optArgList.isEmpty()) {
+            return keyword.toString();
+        }
         return keyword + " " + CommandOptionArgument.parseString(optArgList);
     }
 

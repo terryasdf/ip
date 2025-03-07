@@ -32,7 +32,9 @@ public class CommandOptionArgument {
 
     @Override
     public String toString() {
-        if (arg.isEmpty()) return opt;
+        if (arg.isEmpty()) {
+            return opt;
+        }
         return opt + ' ' + arg;
     }
 

@@ -3,7 +3,8 @@ package terry.framework;
 import terry.command.Command;
 import terry.command.CommandKeyword;
 import terry.command.CommandParser;
-import terry.exception.*;
+import terry.exception.ExceptionHandler;
+import terry.exception.UnknownCommandKeywordException;
 import terry.message.MessageHandler;
 
 import java.util.Scanner;
@@ -29,10 +30,15 @@ public class Framework {
             while (true) {
                 String cmdInput = in.nextLine().strip();
                 // Ignore empty input
-                if (cmdInput.length() == 0) continue;
+                if (cmdInput.length() == 0) {
+                    continue;
+                }
+
                 try {
                     Command cmd = CommandParser.parseCommandInput(cmdInput);
-                    if (CommandRunner.executeCommand(cmd)) continue;
+                    if (CommandRunner.executeCommand(cmd)) {
+                        continue;
+                    }
                     return; // Bye and shut down
                 } catch (UnknownCommandKeywordException e) {
                     ExceptionHandler.handleUnknownCommandKeywordException(e);

@@ -25,7 +25,9 @@ public class CommandParser {
         }
 
         int numWords = cmdArgs.length;
-        if (numWords == 1) return cmd;
+        if (numWords == 1) {
+            return cmd;
+        }
 
         CommandOptionArgument newOptArg = new CommandOptionArgument();
         StringBuilder arg = new StringBuilder();

@@ -86,6 +86,7 @@ public class Event extends ToDo {
         } if (endTime == null) {
             throw new MissingOptionException(optArgList);
         }
+
         return new Event(description, startTime, endTime);
     }
 

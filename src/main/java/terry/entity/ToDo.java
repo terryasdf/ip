@@ -18,7 +18,8 @@ public class ToDo {
      * @exception MissingOptionException when parameter count is less than
      * {@code leastCount}
      * */
-    protected static void checkArgCount(List<CommandOptionArgument> optArgList, int leastCount) throws MissingOptionException {
+    protected static void checkArgCount(List<CommandOptionArgument> optArgList, int leastCount)
+            throws MissingOptionException {
         if (optArgList.size() < leastCount) {
             throw new MissingOptionException(optArgList);
         }
@@ -70,9 +71,11 @@ public class ToDo {
     public static ToDo parse(List<CommandOptionArgument> optArgList) throws MissingOptionException {
         checkArgCount(optArgList, 1);
         String description = optArgList.iterator().next().getArg();
+
         if (description.isEmpty()) {
             throw new MissingOptionException(optArgList);
         }
+
         return new ToDo(description);
     }
 
