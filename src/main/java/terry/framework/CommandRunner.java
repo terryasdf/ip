@@ -76,6 +76,8 @@ public class CommandRunner {
             case CMD_LOAD:
                 MessageHandler.printMessageGeneric(Controller.readFile());
                 break;
+            default:
+                break;
             }
         } catch (OptionArgumentException e) {
             ExceptionHandler.handleOptionArgumentException(e);

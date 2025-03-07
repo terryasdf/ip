@@ -7,7 +7,7 @@ public class CommandParser {
     /**
      * Parses the input line into {@link Command}.
      */
-    static public Command parseCommandInput(String cmdInput) throws UnknownCommandKeywordException {
+    public static Command parseCommandInput(String cmdInput) throws UnknownCommandKeywordException {
         String[] cmdArgs = cmdInput.split(" ");
         Command cmd = null;
 
