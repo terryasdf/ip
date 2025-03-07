@@ -1,8 +1,8 @@
 package terry.exception;
 
-import terry.msg.Msg;
-import terry.msg.MsgHandler;
-import terry.msg.ReturnStatus;
+import terry.message.Message;
+import terry.message.MessageHandler;
+import terry.message.ReturnStatus;
 
 import java.io.IOException;
 
@@ -12,47 +12,47 @@ import java.io.IOException;
 public class ExceptionHandler {
 
     /**
-     * Handles {@link OptArgException} and displays an error {@link Msg} with
+     * Handles {@link OptionArgumentException} and displays an error {@link Message} with
      * {@code ReturnStatus.EXCEPTION_ARG}.
      */
-    public static void handleArgException(OptArgException e) {
-        Msg msg = new Msg(ReturnStatus.EXCEPTION_CMD_OPTARG, e.getMessage());
-        MsgHandler.printMsgGeneric(msg);
+    public static void handleOptionArgumentException(OptionArgumentException e) {
+        Message msg = new Message(ReturnStatus.EXCEPTION_CMD_OPTARG, e.getMessage());
+        MessageHandler.printMessageGeneric(msg);
     }
 
     /**
-     * Handles {@link UnknownCmdKeywordException} and displays an error {@link Msg} with
+     * Handles {@link UnknownCommandKeywordException} and displays an error {@link Message} with
      * {@code ReturnStatus.EXCEPTION_UNKNOWN_CMD_KEYWORD}.
      */
-    public static void handleUnknownCmdKeywordException(UnknownCmdKeywordException e) {
-        Msg msg = new Msg(ReturnStatus.EXCEPTION_CMD_KEYWORD, e.getMessage());
-        MsgHandler.printMsgGeneric(msg);
+    public static void handleUnknownCommandKeywordException(UnknownCommandKeywordException e) {
+        Message msg = new Message(ReturnStatus.EXCEPTION_CMD_KEYWORD, e.getMessage());
+        MessageHandler.printMessageGeneric(msg);
     }
 
     /**
-     * Handles {@link NumberFormatException} and displays an error {@link Msg} with
+     * Handles {@link NumberFormatException} and displays an error {@link Message} with
      * {@code ReturnStatus.FAILED}.
      */
     public static void handleNumberFormatException(NumberFormatException e) {
-        Msg msg = new Msg(ReturnStatus.FAILED, "Your argument is not a number:\n" + e.getMessage());
-        MsgHandler.printMsgGeneric(msg);
+        Message msg = new Message(ReturnStatus.FAILED, "Your argument is not a number:\n" + e.getMessage());
+        MessageHandler.printMessageGeneric(msg);
     }
 
     /**
-     * Handles {@link IOException} and displays an error {@link Msg} with
+     * Handles {@link IOException} and displays an error {@link Message} with
      * {@code ReturnStatus.EXCEPTION_IO}.
      */
     public static void handleIOException(IOException e) {
-        Msg msg = new Msg(ReturnStatus.EXCEPTION_IO, "Cannot access the file:\n" + e.getMessage());
-        MsgHandler.printMsgGeneric(msg);
+        Message msg = new Message(ReturnStatus.EXCEPTION_IO, "Cannot access the file:\n" + e.getMessage());
+        MessageHandler.printMessageGeneric(msg);
     }
 
     /**
-     * Handles {@link RuntimeException} and displays an error {@link Msg} with
+     * Handles {@link RuntimeException} and displays an error {@link Message} with
      * {@code ReturnStatus.FAILED}.
      */
     public static void handleRuntimeException(RuntimeException e) {
-        Msg msg = new Msg(ReturnStatus.FAILED, "Oh no! Something went wrong:\n" + e.getMessage());
-        MsgHandler.printMsgGeneric(msg);
+        Message msg = new Message(ReturnStatus.FAILED, "Oh no! Something went wrong:\n" + e.getMessage());
+        MessageHandler.printMessageGeneric(msg);
     }
 }

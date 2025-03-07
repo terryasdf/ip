@@ -1,14 +1,16 @@
 package terry.exception;
 
+import terry.command.CommandKeyword;
+
 /**
- * Occurs when a command keyword is not in {@link terry.cmd.CmdKeyword} is read from user input.
+ * Occurs when a command keyword is not in {@link CommandKeyword} is read from user input.
  */
-public class UnknownCmdKeywordException extends Exception {
+public class UnknownCommandKeywordException extends Exception {
 
     private static final String MSG = "Uh oh, unknown keyword: ";
     private final String keyword;
 
-    public UnknownCmdKeywordException(String keyword) {
+    public UnknownCommandKeywordException(String keyword) {
         super(MSG);
         this.keyword = keyword;
     }

@@ -1,33 +1,33 @@
-package terry.cmd;
+package terry.command;
 
-import terry.exception.UnknownCmdKeywordException;
+import terry.exception.UnknownCommandKeywordException;
 
-public class CmdParser {
+public class CommandParser {
 
     /**
-     * Parses the input line into {@link Cmd}.
+     * Parses the input line into {@link Command}.
      */
-    static public Cmd parseCmdInput(String cmdInput) throws UnknownCmdKeywordException {
+    static public Command parseCommandInput(String cmdInput) throws UnknownCommandKeywordException {
         String[] cmdArgs = cmdInput.split(" ");
-        Cmd cmd = null;
+        Command cmd = null;
 
         String keywordString = cmdArgs[0].toLowerCase();
-        for (CmdKeyword i : CmdKeyword.values()) {
+        for (CommandKeyword i : CommandKeyword.values()) {
             if (keywordString.equals(i.toString())) {
-                cmd = new Cmd(i);
+                cmd = new Command(i);
                 break;
             }
         }
 
         // Not a legit keyword
         if (cmd == null) {
-            throw new UnknownCmdKeywordException(keywordString);
+            throw new UnknownCommandKeywordException(keywordString);
         }
 
         int numWords = cmdArgs.length;
         if (numWords == 1) return cmd;
 
-        CmdOptArg newOptArg = new CmdOptArg();
+        CommandOptionArgument newOptArg = new CommandOptionArgument();
         StringBuilder arg = new StringBuilder();
         for (int i = 1; i < numWords; ++i) {
             if (!isOpt(cmdArgs[i])) {
@@ -37,14 +37,14 @@ public class CmdParser {
             // Contains extra words before a new option
             if (i > 1) {
                 newOptArg.setArg(arg.toString().strip());
-                cmd.addOptArg(newOptArg);
+                cmd.addOptionArgument(newOptArg);
             }
-            newOptArg = new CmdOptArg(cmdArgs[i].substring(1));
+            newOptArg = new CommandOptionArgument(cmdArgs[i].substring(1));
             arg = new StringBuilder();
         }
 
         newOptArg.setArg(arg.toString().strip());
-        cmd.addOptArg(newOptArg);
+        cmd.addOptionArgument(newOptArg);
         return cmd;
     }
 

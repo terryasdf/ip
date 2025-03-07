@@ -1,4 +1,4 @@
-package terry.cmd;
+package terry.command;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import java.util.List;
  * Stores option-argument pairs.
  */
 
-public class CmdOptArg {
+public class CommandOptionArgument {
 
     /**
      * Stores the option, {@code '-'} or {@code '/'} excluded.
@@ -17,7 +17,7 @@ public class CmdOptArg {
     /**
      * Constructs a {@code CmdOptArg} with empty {@code opt} and {@code arg}.
      */
-    public CmdOptArg() {
+    public CommandOptionArgument() {
         this.opt = "";
         this.arg = "";
     }
@@ -25,7 +25,7 @@ public class CmdOptArg {
     /**
      * Constructs a {@code CmdOptArg} with empty {@code arg}.
      */
-    public CmdOptArg(String opt) {
+    public CommandOptionArgument(String opt) {
         this.opt = opt;
         this.arg = "";
     }
@@ -77,9 +77,9 @@ public class CmdOptArg {
      * Parses a {@link List} of arguments into {@code String}.
      * <ul><li>Removes leading and trailing whitespaces</li>
      */
-    public static String parseString(List<CmdOptArg> optArgList) {
+    public static String parseString(List<CommandOptionArgument> optArgList) {
         StringBuilder ret = new StringBuilder();
-        for (CmdOptArg optArg : optArgList) {
+        for (CommandOptionArgument optArg : optArgList) {
             ret.append(optArg).append(' ');
         }
         return ret.toString().strip();

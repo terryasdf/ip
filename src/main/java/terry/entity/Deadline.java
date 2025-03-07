@@ -1,8 +1,8 @@
 package terry.entity;
 
 import org.json.JSONObject;
-import terry.cmd.CmdOptArg;
-import terry.exception.MissingOptArgException;
+import terry.command.CommandOptionArgument;
+import terry.exception.MissingOptionException;
 
 import java.util.List;
 
@@ -45,17 +45,17 @@ public class Deadline extends ToDo {
     }
 
     /**
-     * Parses a given list of {@link CmdOptArg} and returns a {@link ToDo} if possible.
+     * Parses a given list of {@link CommandOptionArgument} and returns a {@link ToDo} if possible.
      * <ul>Required options:
      *  <li>"": description</li>
      *  <li>"by": deadline</li>
      */
-    public static Deadline parse(List<CmdOptArg> optArgList) throws MissingOptArgException {
+    public static Deadline parse(List<CommandOptionArgument> optArgList) throws MissingOptionException {
         checkArgCount(optArgList, 2);
         String description = null;
         String ddlTime = null;
 
-        for (CmdOptArg optArg : optArgList) {
+        for (CommandOptionArgument optArg : optArgList) {
             if (optArg.isOpt("")) {
                 description = optArg.getArg();
             } else if (optArg.isOpt("by")) {
@@ -64,9 +64,9 @@ public class Deadline extends ToDo {
         }
 
         if (description == null) {
-            throw new MissingOptArgException(optArgList);
+            throw new MissingOptionException(optArgList);
         } if (ddlTime == null) {
-            throw new MissingOptArgException(optArgList);
+            throw new MissingOptionException(optArgList);
         }
         return new Deadline(description, ddlTime);
     }

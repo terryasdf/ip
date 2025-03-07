@@ -1,9 +1,9 @@
-package terry.msg;
+package terry.message;
 
 /**
  * Stores messages to be displayed.
  */
-public enum MsgString {
+public enum MessageString {
     SPLIT_LINE,
     GREETING_MSG,
     EXIT_MSG,

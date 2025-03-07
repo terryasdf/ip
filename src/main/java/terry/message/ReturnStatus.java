@@ -1,4 +1,4 @@
-package terry.msg;
+package terry.message;
 
 /**
  * Stores all possible status of a command execution.
